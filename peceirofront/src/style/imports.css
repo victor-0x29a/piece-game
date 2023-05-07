@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Livvic&display=swap');
+
+* {
+    font-family: 'Livvic', sans-serif;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    z-index: 0;
+}
