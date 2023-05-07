@@ -9,6 +9,7 @@ left: 0;
 right: 0;
 background-color: ${bgMenus};
 z-index: 2;
+height: 4rem;
 span {
     width: 15rem;
     display: flex;
@@ -34,4 +35,12 @@ justify-content: center;
 align-items: center;
 background-color: ${bgMenus};
 z-index: 1;
+`
+
+export const App = styled.div`
+margin-top: 4rem;
+margin-left: 220px;
+height: 89.6vh;
+overflow-x: hidden;
+overflow-y: scroll;
 `

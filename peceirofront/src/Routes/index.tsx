@@ -2,6 +2,7 @@ import React from "react";
 
 import SideBarComponent from "../Components/sidebar.component";
 import TopBarComponent from "../Components/topbar.component";
+import { App } from "../style/components";
 
 import LoginPage from '../Pages/login'
 import { Route, Routes } from "react-router-dom";
@@ -15,11 +16,11 @@ const Rotas = () => {
             <TopBarComponent />
             <SideBarComponent />
 
-            <div className="ml-64 mt-20 apps">
+            <App>
                 <Routes>
                     <Route path="/login" Component={LoginPage} />
                 </Routes>
-            </div>
+            </App>
         </ >
     )
 }
