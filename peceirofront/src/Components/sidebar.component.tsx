@@ -7,9 +7,21 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { useMediaQuery } from '@material-ui/core';
 import { listItems } from '../data/sidebar.data'
+import { connect } from 'react-redux'
+import { account, stateType } from '../store/types/state.type';
+import { useNavigate } from 'react-router-dom';
 
-const SideBarComponent = () => {
+const MapStateToProps = (state: stateType) => ({
+    account: state.account
+})
+
+type thisProps = {
+    account: account
+}
+
+const SideBarComponent = ({ account }: thisProps) => {
     const mobile = useMediaQuery("(max-width: 612px)")
+    const navigate = useNavigate()
     return (
         <SideBar>
             <List
@@ -22,19 +34,40 @@ const SideBarComponent = () => {
                 }}
             >
                 {listItems?.map((item, index: number) => (
-                    <ListItem button key={index} alignItems='center' style={{
-                        justifyContent: "center",
-                    }}>
-                        {mobile && item.image}
-                        {!mobile && <ListItemIcon>
-                            {item.image}
-                        </ListItemIcon>}
-                        {!mobile && <ListItemText primary={item.name} />}
-                    </ListItem>
+                    <>
+                        {
+                            item.logged && account.logged && (
+                                <ListItem button key={index}
+                                    onClick={() => (navigate(item.href))} alignItems='center' style={{
+                                        justifyContent: "center",
+                                    }}>
+                                    {mobile && item.image}
+                                    {!mobile && <ListItemIcon>
+                                        {item.image}
+                                    </ListItemIcon>}
+                                    {!mobile && <ListItemText primary={item.name} />}
+                                </ListItem>
+                            )
+                        }
+                        {
+                            !item.logged && !account.logged && (
+                                <ListItem button key={index}
+                                    onClick={() => (navigate(item.href))} alignItems='center' style={{
+                                        justifyContent: "center",
+                                    }}>
+                                    {mobile && item.image}
+                                    {!mobile && <ListItemIcon>
+                                        {item.image}
+                                    </ListItemIcon>}
+                                    {!mobile && <ListItemText primary={item.name} />}
+                                </ListItem>
+                            )
+                        }
+                    </>
                 ))}
             </List>
         </SideBar>
     )
 }
 
-export default SideBarComponent
+export default connect(MapStateToProps)(SideBarComponent) 

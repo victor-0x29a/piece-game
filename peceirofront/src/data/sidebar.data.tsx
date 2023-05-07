@@ -3,8 +3,8 @@ import ExtensionIcon from '@material-ui/icons/Extension';
 import GamesIcon from '@material-ui/icons/Games';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
-import TurnedInIcon from '@material-ui/icons/TurnedIn';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
 
 type item = {
     name: string,
@@ -47,13 +47,13 @@ export const listItems: item[] = [
     {
         name: "Entrar",
         href: "/login",
-        image: <TrendingFlatIcon />,
+        image: <VpnKeyIcon />,
         logged: false
     },
     {
         name: "Cadastrar",
         href: "/register",
-        image: <TurnedInIcon />,
+        image: <AddCircleOutlineIcon />,
         logged: false
     },
 ]

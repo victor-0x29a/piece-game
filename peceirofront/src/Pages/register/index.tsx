@@ -2,11 +2,10 @@ import React from 'react'
 
 import { useFormik } from "formik";
 import * as yup from "yup";
-import LoginFormComponent from './components/form.component'
 import { Box } from '@material-ui/core'
+import RegisterFormComponent from './components/form.component';
 
-
-const LoginPage = () => {
+const RegisterPage = () => {
     const Formik = useFormik({
         initialValues: {
             email: "",
@@ -14,7 +13,10 @@ const LoginPage = () => {
         },
         validationSchema: yup.object({
             email: yup.string().email("E-mail inválido.").required("O email é obrigatório."),
-            password: yup.string().min(8, "A senha deve ter 8 caracteres.").max(48, "Máximo de 48 caracteres.").required("A senha é obrigatória.")
+            password: yup.string().min(8, "A senha deve ter 8 caracteres.").max(48, "Máximo de 48 caracteres.").required("A senha é obrigatória."),
+            passwordconfirm: yup.string().min(8, "A senha deve ter 8 caracteres.").max(48, "Máximo de 48 caracteres.").required("A confirmação de senha é obrigatória."),
+            phone: yup.number().min(20, "Número inválido.").max(120, "Número inválido.").required("O telefone é obrigatório."),
+            name: yup.string().min(12, "Nome inválido.").max(64, "Nome inválido.").required("O nome é obrigatório.")
         }),
         onSubmit: (values) => {
             alert(values)
@@ -30,9 +32,9 @@ const LoginPage = () => {
             width: "400px",
             minWidth: "400px"
         }}>
-            <LoginFormComponent formik={Formik} />
+            <RegisterFormComponent formik={Formik} />
         </Box>
     </Box>
 }
 
-export default LoginPage
+export default RegisterPage
