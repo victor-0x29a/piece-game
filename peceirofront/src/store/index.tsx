@@ -1,4 +1,8 @@
-import Store from 'redux'
+import { configureStore } from '@reduxjs/toolkit'
+import { appReducer } from './Reducer'
 
 
-const store = new Store()
+export const store = configureStore({
+    reducer: appReducer,
+    devTools: true
+})
