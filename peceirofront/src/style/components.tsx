@@ -2,28 +2,6 @@ import styled from 'styled-components'
 
 const bgMenus = "#6cbdb5"
 
-export const Nav = styled.nav`
-position: absolute;
-top: 0;
-left: 0;
-right: 0;
-background-color: ${bgMenus};
-z-index: 2;
-height: 4rem;
-span {
-    width: 15rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: default;
-    user-select: none;
-    img {
-        width: 70px;
-        height: 70px;
-    }
-}
-`
-
 export const SideBar = styled.aside`
 position: absolute;
 left: 0; 
@@ -34,6 +12,7 @@ justify-content: center;
 align-items: center;
 background-color: ${bgMenus};
 z-index: 1;
+box-shadow: 0 0 1em black;
 @media screen and (max-width: 612px){
     height: 4rem;
     width: 100vw;

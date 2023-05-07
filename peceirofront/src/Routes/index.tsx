@@ -1,7 +1,6 @@
 import React from "react";
 
 import SideBarComponent from "../Components/sidebar.component";
-import TopBarComponent from "../Components/topbar.component";
 import { App } from "../style/components";
 
 import LoginPage from '../Pages/login'

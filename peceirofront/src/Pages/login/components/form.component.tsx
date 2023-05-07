@@ -27,7 +27,8 @@ const LoginFormComponent = ({ formik }: propsLogin) => {
         }}>
             <p style={{
                 fontSize: !mobile ? "2rem" : "1.4rem",
-                marginBottom: "2rem"
+                marginBottom: "2rem",
+                fontWeight: "600"
             }}>Bem vindo, novamente!</p>
         </Box>
         <TextField
