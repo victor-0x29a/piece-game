@@ -12,8 +12,6 @@ const Rotas = () => {
 
     return (
         <>
-
-            <TopBarComponent />
             <SideBarComponent />
 
             <App>

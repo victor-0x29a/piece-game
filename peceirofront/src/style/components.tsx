@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const bgMenus = "#343838"
+const bgMenus = "#6cbdb5"
 
 export const Nav = styled.nav`
 position: absolute;
@@ -38,9 +38,14 @@ z-index: 1;
 `
 
 export const App = styled.div`
-margin-top: 4rem;
 margin-left: 220px;
-height: 89.6vh;
+height: 100vh;
 overflow-x: hidden;
 overflow-y: scroll;
+`
+
+export const FormLogin = styled.form`
+display: flex;
+flex-direction: column;
+width: 100%;
 `
