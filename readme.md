@@ -10,17 +10,6 @@
 <h4 align="center">Jogo de aposta, baseada em peças (componentes) de computadores.</h4>
 
 
-<p align="center">
-  <a href="#key-features">Key Features</a> •
-  <a href="#how-to-use">How To Use</a> •
-  <a href="#download">Download</a> •
-  <a href="#credits">Credits</a> •
-  <a href="#related">Related</a> •
-  <a href="#license">License</a>
-</p>
-
-![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
-
 ## Propósito
 
 Criar um back-end onde tenha um CRUD de usuários e componentes de computadores (conhecidos), após isso fazer com que os usuários consigam apostar em qual componente será sorteado, assim, todas as peças (componentes) que o usuário escolheu e bateu com o que o servidor sorteou, teoricamente ele "levaria" para a casa.
@@ -61,6 +50,6 @@ MIT
 
 ---
 
-> GitHub [@amitmerchant1990](https://github.com/victor-0x29a) &nbsp;&middot;&nbsp;
-> Linkedin [@amit_merchant](https://www.linkedin.com/in/viictor/)
+> GitHub [@victor-0x29a](https://github.com/victor-0x29a) &nbsp;&middot;&nbsp;
+> Linkedin [@viictor](https://www.linkedin.com/in/viictor/)
 
