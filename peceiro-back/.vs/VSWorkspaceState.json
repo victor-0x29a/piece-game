@@ -2,8 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\database"
+    "\\src\\autenticacao",
+    "\\src\\autenticacao\\entities",
+    "\\src\\constants",
+    "\\src\\database\\entities",
+    "\\src\\database\\entities\\DTO",
+    "\\src\\user\\dto"
   ],
-  "SelectedNode": "\\src\\app.module.ts",
+  "SelectedNode": "\\src\\autenticacao\\autenticacao.service.ts",
   "PreviewInSolutionExplorer": false
 }
