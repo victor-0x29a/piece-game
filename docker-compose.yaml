@@ -1,0 +1,13 @@
+version: '3'
+services:
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_USER: victao
+      MYSQL_PASSWORD: passwd
+      MYSQL_DATABASE: partdb
+      MYSQL_RANDOM_ROOT_PASSWORD: false
+    ports:
+      - "3306:3306"
+    volumes:
+      - /path/on/host:/var/lib/mysql
