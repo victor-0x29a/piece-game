@@ -41,6 +41,7 @@ Frontend:
 - Framework: MUI;
 - Style: Styled-components;
 - Requisições: Axios;
+- Alerts: React-toastify;
 
 ## Créditos - tools and frameworks
 
