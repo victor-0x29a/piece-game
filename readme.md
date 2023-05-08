@@ -15,6 +15,10 @@
 Criar um back-end onde tenha um CRUD de usuários e componentes de computadores (conhecidos), após isso fazer com que os usuários consigam apostar em qual componente será sorteado, assim, todas as peças (componentes) que o usuário escolheu e bateu com o que o servidor sorteou, teoricamente ele "levaria" para a casa.
 * Vale lembrar que antes disso, haveria um sistema de créditos para conseguir apostar!
 
+## Implementações
+
+* No sistema de crédito, vou colocar a API sandbox do PagBank para gerar qr-codes PIX e simular o pagamento.
+
 ## Tecnologias utilizadas
 
  - NestJS
@@ -36,7 +40,7 @@ Frontend:
     - Style: Styled-components;
     - Requisições: Axios;
 
-## Créditos
+## Créditos - tools and frameworks
 
 - [Docker](https://www.docker.com/)
 - [React.js](https://react.dev/)
