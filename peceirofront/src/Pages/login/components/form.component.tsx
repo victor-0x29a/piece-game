@@ -7,7 +7,6 @@ import { FormLogin } from '../../../style/components';
 import { withStyles } from '@material-ui/core';
 import { Box } from '@material-ui/core'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
-
 const ColorButton = withStyles(() => ({
     root: {
         color: "white",
@@ -17,8 +16,8 @@ const ColorButton = withStyles(() => ({
         },
     },
 }))(Button);
-
 const LoginFormComponent = ({ formik }: propsLogin) => {
+
     const mobile = useMediaQuery("(max-width: 600px)")
     return <FormLogin onSubmit={formik.handleSubmit}>
         <Box component="div" style={{

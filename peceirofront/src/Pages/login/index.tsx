@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import LoginFormComponent from './components/form.component'
 import { Box } from '@material-ui/core'
+import vUseAlert from '../../customHooks/vUseAlert';
 
 
 const LoginPage = () => {
@@ -16,8 +17,8 @@ const LoginPage = () => {
             email: yup.string().email("E-mail inválido.").required("O email é obrigatório."),
             password: yup.string().min(8, "A senha deve ter 8 caracteres.").max(48, "Máximo de 48 caracteres.").required("A senha é obrigatória.")
         }),
-        onSubmit: (values) => {
-            alert(values)
+        onSubmit: async (values) => {
+            await vUseAlert("success", "oi kk")
         }
     })
     return <Box component={"div"} style={{

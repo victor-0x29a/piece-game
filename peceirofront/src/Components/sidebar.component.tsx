@@ -34,7 +34,10 @@ const SideBarComponent = ({ account }: thisProps) => {
                 }}
             >
                 {listItems?.map((item, index: number) => (
-                    <>
+                    <div style={{
+                        margin: "0",
+                        padding: "0"
+                    }} key={index}>
                         {
                             item.logged && account.logged && (
                                 <ListItem button key={index}
@@ -63,7 +66,7 @@ const SideBarComponent = ({ account }: thisProps) => {
                                 </ListItem>
                             )
                         }
-                    </>
+                    </div>
                 ))}
             </List>
         </SideBar>
