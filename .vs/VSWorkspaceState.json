@@ -1,10 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\peceirofront",
+    "\\peceiro-back",
+    "\\peceiro-back\\src",
+    "\\peceiro-back\\src\\database",
     "\\peceirofront\\src",
     "\\peceirofront\\src\\assets"
   ],
-  "SelectedNode": "\\peceirofront\\src\\main.tsx",
+  "SelectedNode": "\\peceiro-back\\src\\database\\database.module.ts",
   "PreviewInSolutionExplorer": false
 }
