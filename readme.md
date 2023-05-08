@@ -29,18 +29,18 @@ Criar um back-end onde tenha um CRUD de usuários e componentes de computadores 
 
 Backend:
 
-    - Validação de dados: ZOD;
-    - Autenticação: JWT;
-    - SGDB: MySQL;
-    - ORM: Sequelize;
+- Validação de dados: ZOD;
+- Autenticação: JWT;
+- SGDB: MySQL;
+- ORM: Sequelize;
 
 Frontend:
 
-    - Validação de dados: YUP + Formik;
-    - Store: Redux;
-    - Framework: MUI;
-    - Style: Styled-components;
-    - Requisições: Axios;
+- Validação de dados: YUP + Formik;
+- Store: Redux;
+- Framework: MUI;
+- Style: Styled-components;
+- Requisições: Axios;
 
 ## Créditos - tools and frameworks
 
