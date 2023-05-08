@@ -1,7 +1,7 @@
 
 <h1 align="center">
   <br>
-  <img src="https://th.bing.com/th/id/OIP.uwjsOY0BMXVr4edDEwH6PwAAAA?pid=ImgDet&rs=1" alt="Piece game's" width="200">
+  <img src="https://th.bing.com/th/id/OIP.-mEMkGj3qTyFzVmWyiG8yAHaHa?pid=ImgDet&rs=1" alt="Piece game's" width="200">
   <br>
   Piece Game
   <br>
