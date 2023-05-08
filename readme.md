@@ -28,12 +28,14 @@ Criar um back-end onde tenha um CRUD de usuários e componentes de computadores 
 ## Módulos utilizados
 
 Backend:
+
     - Validação de dados: ZOD;
     - Autenticação: JWT;
     - SGDB: MySQL;
     - ORM: Sequelize;
 
 Frontend:
+
     - Validação de dados: YUP + Formik;
     - Store: Redux;
     - Framework: MUI;
