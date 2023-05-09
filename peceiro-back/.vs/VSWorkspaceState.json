@@ -4,11 +4,8 @@
     "\\src",
     "\\src\\autenticacao",
     "\\src\\autenticacao\\entities",
-    "\\src\\constants",
-    "\\src\\database\\entities",
-    "\\src\\database\\entities\\DTO",
-    "\\src\\user\\dto"
+    "\\src\\constants"
   ],
-  "SelectedNode": "\\src\\autenticacao\\autenticacao.service.ts",
+  "SelectedNode": "\\src\\autenticacao\\autenticacao.controller.ts",
   "PreviewInSolutionExplorer": false
 }

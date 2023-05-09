@@ -10,7 +10,7 @@ export const registerSchema = z.object({
     .string()
     .min(12, 'O nome deve ter no mínimo 12 caracteres.')
     .max(64, 'O nome deve ter no máximo 128 caracteres.'),
-  phone: z.number().min(20, 'Número inválido.').max(120, 'Número inválido.'),
+  phone: z.number(),
   password: z
     .string()
     .min(8, 'A senha deve ter no mínimo 8 caracteres.')

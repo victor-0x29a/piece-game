@@ -16,7 +16,7 @@ import { User } from './entities/user.entity';
       port: Number(process.env.DATABASE_PORT),
       models: [User],
       autoLoadModels: true,
-      synchronize: false,
+      synchronize: true,
     }),
   ],
   providers: [DatabaseService],

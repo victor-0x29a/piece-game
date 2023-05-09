@@ -1,4 +1,4 @@
-import { Controller, Post } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { UserDTO } from '../database/entities/DTO/user.dto';
 import { AutenticacaoService } from './autenticacao.service';
 
@@ -6,7 +6,11 @@ import { AutenticacaoService } from './autenticacao.service';
 export class AutenticacaoController {
   constructor(private readonly AutenticacaoService: AutenticacaoService) {}
   @Post('cadastro')
-  async cadastrar(Body: UserDTO) {
-    return this.AutenticacaoService.cadastrar(Body);
+  async cadastrar(@Body() Corpo: UserDTO) {
+    return this.AutenticacaoService.cadastrar(Corpo);
+  }
+  @Post('entrar')
+  async entrar(@Body() corpo: Partial<UserDTO>) {
+    return this.AutenticacaoService.entrar(corpo);
   }
 }
