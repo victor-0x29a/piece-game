@@ -5,6 +5,8 @@ import * as yup from "yup";
 import LoginFormComponent from './components/form.component'
 import { Box } from '@material-ui/core'
 import vUseAlert from '../../customHooks/vUseAlert';
+import vUseFetch from '../../customHooks/vUseFetch';
+import { LoginDTO } from '../../dto/user.dto';
 
 
 const LoginPage = () => {
@@ -17,8 +19,24 @@ const LoginPage = () => {
             email: yup.string().email("E-mail inválido.").required("O email é obrigatório."),
             password: yup.string().min(8, "A senha deve ter 8 caracteres.").max(48, "Máximo de 48 caracteres.").required("A senha é obrigatória.")
         }),
-        onSubmit: async (values) => {
-            await vUseAlert("success", "oi kk")
+        onSubmit: async (values: LoginDTO, Formulario) => {
+            await vUseFetch({
+                endpoint: "/autenticacao/cadastro",
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                data: {
+                    "email": values.email,
+                    "password": values.password
+                }
+            }).then(async (data) => {
+                await vUseAlert('success', data.data.message)
+                Formulario.setValues({ email: '', password: ''})
+                Formulario.setTouched({ email: false, password: false})
+            }).catch(async (err) => {
+                await vUseAlert('error', err.data.error)
+            })
         }
     })
     return <Box component={"div"} style={{

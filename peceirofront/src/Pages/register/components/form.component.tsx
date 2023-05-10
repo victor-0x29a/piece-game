@@ -37,6 +37,7 @@ const RegisterFormComponent = ({ formik }: propsRegister) => {
             type='username'
             color="primary"
             name="name"
+            value={formik.values["name"]}
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             error={formik.touched.name && formik.errors.name ? true : false}
@@ -49,6 +50,7 @@ const RegisterFormComponent = ({ formik }: propsRegister) => {
             type='email'
             color="primary"
             name="email"
+            value={formik.values["email"]}
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             error={formik.touched.email && formik.errors.email ? true : false}
@@ -61,6 +63,7 @@ const RegisterFormComponent = ({ formik }: propsRegister) => {
             type='phone'
             color="primary"
             name="phone"
+            value={formik.values["phone"] === 0 ? '' : formik.values["phone"]}
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             error={formik.touched.phone && formik.errors.phone ? true : false}
@@ -73,6 +76,7 @@ const RegisterFormComponent = ({ formik }: propsRegister) => {
             type='password'
             color="primary"
             name="password"
+            value={formik.values["password"]}
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             error={formik.touched.password && formik.errors.password ? true : false}
@@ -85,6 +89,7 @@ const RegisterFormComponent = ({ formik }: propsRegister) => {
             type='password'
             color="primary"
             name="passwordconfirm"
+            value={formik.values["passwordconfirm"]}
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             error={formik.touched.passwordconfirm && formik.errors.passwordconfirm ? true : false}

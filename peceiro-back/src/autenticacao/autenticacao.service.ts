@@ -8,9 +8,9 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { serverResponse } from '../app.constant';
-import { UserDTO } from '../database/entities/DTO/user.dto';
+import { UserDTO } from '../user/dto/create-user.dto';
 import { User } from '../database/entities/user.entity';
-import { loginSchema, registerSchema } from './entities/user.entity';
+import { loginSchema, registerSchema } from './entities/user.entity.validation';
 import { response } from './types/auth.type';
 import * as bcrypt from 'bcrypt';
 

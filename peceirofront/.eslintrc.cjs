@@ -9,6 +9,6 @@ export default = {
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   plugins: ['react-refresh'],
   rules: {
-    'react-refresh/only-export-components': 'off',
+    'react-refresh/only-export-components': 'off'
   },
 }

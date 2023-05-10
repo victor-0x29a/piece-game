@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 import { responseFetch } from './types/vfetch.type'
 
 
@@ -15,34 +15,27 @@ const vUseFetch = async ({
     data,
     headers
 }: thisProps): Promise<responseFetch> => {
-    if (!endpoint || !method) {
-        return {
-            error: true,
-            message: "Confira os dados fornecidos!"
-        }
-    }
-    return await axios({
-        url: "http://localhost:3000" + endpoint,
-        method: method,
-        data: data,
-        headers: {
-            ...headers
-        }
-    }).then((data: AxiosResponse) => {
-        return {
-            error: false,
-            message: "Requisição ok.",
-            statusCode: data.status,
-            response: data
-        }
-    }).catch((err: AxiosResponse) => {
-        return {
-            error: true,
-            message: "Requisição mal sucedida.",
-            statusCode: err.status,
-            response: err
-        }
+    return new Promise(async (resolve, reject) => {
+        await axios({
+            url: "http://localhost:3000" + endpoint,
+            headers: {
+                ...headers
+            },
+            method: method,
+            data: data
+        }).then(({ data }) => {
+            resolve({
+                error: false,
+                data: data
+            })
+        }).catch((err) => {
+            reject({
+                error: true,
+                data: err["response"]["data"]
+            })
+        })
     })
+
 }
 
 export default vUseFetch
