@@ -7,9 +7,23 @@ import { Box } from '@material-ui/core'
 import vUseAlert from '../../customHooks/vUseAlert';
 import vUseFetch from '../../customHooks/vUseFetch';
 import { LoginDTO } from '../../dto/user.dto';
+import { connect } from 'react-redux';
+import { account, stateType } from '../../store/types/state.type';
+import { propsIndex } from './types/props.login'
+
+const MapStateToProps = (state: stateType) => ({
+    account: state.account
+})
+
+const MapActionsToProps = (dispatch: any) => ({
+    setAccount: (values: account) => {
+        dispatch({ type: "set_user", payload: values })
+    }
+})
 
 
-const LoginPage = () => {
+
+const LoginPage = ({ account, setAccount }: propsIndex) => {
     const Formik = useFormik({
         initialValues: {
             email: "",
@@ -21,7 +35,7 @@ const LoginPage = () => {
         }),
         onSubmit: async (values: LoginDTO, Formulario) => {
             await vUseFetch({
-                endpoint: "/autenticacao/cadastro",
+                endpoint: "/autenticacao/entrar",
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -32,8 +46,18 @@ const LoginPage = () => {
                 }
             }).then(async (data) => {
                 await vUseAlert('success', data.data.message)
-                Formulario.setValues({ email: '', password: ''})
-                Formulario.setTouched({ email: false, password: false})
+                Formulario.setValues({ email: '', password: '' })
+                Formulario.setTouched({ email: false, password: false })
+                setAccount({
+                    logged: true,
+                    token: data.data.data["token"],
+                    expiresIn: data.data.data["expiresIn"],
+                    info: {
+                        name: data.data.data["name"],
+                        email: data.data.data["email"],
+                        telefone: data.data.data["phone"]
+                    }
+                })
             }).catch(async (err) => {
                 await vUseAlert('error', err.data.error)
             })
@@ -54,4 +78,4 @@ const LoginPage = () => {
     </Box>
 }
 
-export default LoginPage
+export default connect(MapStateToProps, MapActionsToProps)(LoginPage)

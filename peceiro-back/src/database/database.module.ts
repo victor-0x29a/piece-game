@@ -9,11 +9,26 @@ import { User } from './entities/user.entity';
     ConfigModule.forRoot({ envFilePath: './.env' }),
     SequelizeModule.forRoot({
       dialect: 'mysql',
-      host: process.env.DATABASE_HOST,
-      username: process.env.DATABASE_USER,
-      password: process.env.DATABASE_PASS,
-      database: process.env.DATABASE_NAME,
-      port: Number(process.env.DATABASE_PORT),
+      host:
+        process.env.NODE_ENV !== 'test'
+          ? process.env.DATABASE_HOST
+          : process.env.DATABASETEST_HOST,
+      username:
+        process.env.NODE_ENV !== 'test'
+          ? process.env.DATABASE_USER
+          : process.env.DATABASETEST_USER,
+      password:
+        process.env.NODE_ENV !== 'test'
+          ? process.env.DATABASE_PASS
+          : process.env.DATABASETEST_PASS,
+      database:
+        process.env.NODE_ENV !== 'test'
+          ? process.env.DATABASE_NAME
+          : process.env.DATABASETEST_NAME,
+      port:
+        process.env.NODE_ENV !== 'test'
+          ? Number(process.env.DATABASE_PORT)
+          : Number(process.env.DATABASETEST_PORT),
       models: [User],
       autoLoadModels: true,
       synchronize: true,

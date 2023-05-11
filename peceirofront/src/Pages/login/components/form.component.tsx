@@ -35,6 +35,7 @@ const LoginFormComponent = ({ formik }: propsLogin) => {
             type='email'
             color="primary"
             name="email"
+            value={formik.values["email"]}
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             error={formik.touched.email && formik.errors.email ? true : false}
@@ -46,6 +47,7 @@ const LoginFormComponent = ({ formik }: propsLogin) => {
             type='password'
             color="primary"
             name="password"
+            value={formik.values["password"]}
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             error={formik.touched.password && formik.errors.password ? true : false}

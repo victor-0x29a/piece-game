@@ -3,9 +3,10 @@
     "",
     "\\src",
     "\\src\\autenticacao",
-    "\\src\\autenticacao\\entities",
-    "\\src\\constants"
+    "\\src\\database",
+    "\\src\\user",
+    "\\src\\user\\entities"
   ],
-  "SelectedNode": "\\src\\autenticacao\\autenticacao.controller.ts",
+  "SelectedNode": "\\package.json",
   "PreviewInSolutionExplorer": false
 }
