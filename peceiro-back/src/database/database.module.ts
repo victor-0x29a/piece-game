@@ -32,6 +32,7 @@ import { User } from './entities/user.entity';
       models: [User],
       autoLoadModels: true,
       synchronize: true,
+      sync: { force: process.env.NODE_ENV == 'test' },
     }),
   ],
   providers: [DatabaseService],
