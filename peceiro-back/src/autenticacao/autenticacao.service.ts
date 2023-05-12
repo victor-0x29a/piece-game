@@ -17,7 +17,7 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class AutenticacaoService {
   constructor(private jwt: JwtService) {}
-  private Sign(id: number, authLevel: number): response {
+  public Sign(id: number, authLevel: number): response {
     if (id < 0 || authLevel < 1 || authLevel > 2) {
       throw new InternalServerErrorException();
     }

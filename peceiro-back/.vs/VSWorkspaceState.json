@@ -3,10 +3,11 @@
     "",
     "\\src",
     "\\src\\autenticacao",
+    "\\src\\autenticacao\\types",
     "\\src\\database",
     "\\src\\user",
-    "\\src\\user\\entities"
+    "\\test"
   ],
-  "SelectedNode": "\\package.json",
+  "SelectedNode": "\\test\\user.e2e-spec.ts",
   "PreviewInSolutionExplorer": false
 }
