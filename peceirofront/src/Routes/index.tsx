@@ -6,6 +6,7 @@ import { App } from "../style/components";
 import LoginPage from '../Pages/login'
 import RegisterPage from "../Pages/register";
 import { Route, Routes } from "react-router-dom";
+import BlockRoute from "./block";
 
 
 const Rotas = () => {
@@ -16,8 +17,8 @@ const Rotas = () => {
 
             <App>
                 <Routes>
-                    <Route path="/login" Component={LoginPage} />
-                    <Route path="/register" Component={RegisterPage} />
+                    <Route path="/login" element={<BlockRoute><LoginPage /></BlockRoute>} />
+                    <Route path="/register" element={<BlockRoute><RegisterPage /></BlockRoute>} />
                 </Routes>
             </App>
         </ >

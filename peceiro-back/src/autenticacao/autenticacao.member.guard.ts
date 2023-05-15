@@ -9,7 +9,6 @@ import { JwtService } from '@nestjs/jwt';
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private service: JwtService) {}
-
   async canActivate(context: ExecutionContext) {
     const token: string | undefined = context.switchToHttp().getRequest()
       .headers['authorization'];

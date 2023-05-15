@@ -10,7 +10,7 @@ import { AutenticacaoService } from './autenticacao.service';
     JwtModule.register({
       global: true,
       secret: process.env.SECRET,
-      signOptions: { expiresIn: '400s' },
+      signOptions: { expiresIn: '480s' },
     }),
   ],
   controllers: [AutenticacaoController],

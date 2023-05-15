@@ -13,10 +13,12 @@ import { User } from '../database/entities/user.entity';
 import { loginSchema, registerSchema } from './entities/user.entity.validation';
 import { response } from './types/auth.type';
 import * as bcrypt from 'bcrypt';
+import { Request } from 'express';
 
 @Injectable()
 export class AutenticacaoService {
   constructor(private jwt: JwtService) {}
+  private blacklist: string[] = [];
   public Sign(id: number, authLevel: number): response {
     if (id < 0 || authLevel < 1 || authLevel > 2) {
       throw new InternalServerErrorException();
@@ -63,7 +65,6 @@ export class AutenticacaoService {
         };
       })
       .catch((err: Error) => {
-        console.log(err);
         throw new InternalServerErrorException(
           'Houve um erro interno.',
           'Tente mais tarde, caso persistir entre no suporte!',
@@ -104,4 +105,26 @@ export class AutenticacaoService {
       },
     };
   }
+
+  public async refresh(Req: Request) {
+    const token = Req.headers['authorization'];
+    if (!token || typeof token !== 'string') {
+      throw new UnauthorizedException();
+    }
+    try {
+      const verifyToken = await this.jwt.verifyAsync(token);
+
+      return {
+        ...this.Sign(verifyToken.id, verifyToken.authLevel),
+      };
+    } catch (e) {
+      throw new UnauthorizedException();
+    }
+  }
+
+  public hasInBlacklist = (token: string): boolean => {
+    const findToken = this.blacklist.find((item) => item === token);
+    if (findToken) return true;
+    return false;
+  };
 }

@@ -10,7 +10,6 @@ import { decodedToken } from './types/auth.type';
 @Injectable()
 export class AuthGuardAdmin implements CanActivate {
   constructor(private service: JwtService) {}
-
   async canActivate(context: ExecutionContext) {
     const token: string | undefined = context.switchToHttp().getRequest()
       .headers['authorization'];
