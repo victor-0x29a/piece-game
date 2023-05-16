@@ -3,12 +3,14 @@
     "",
     "\\src",
     "\\src\\autenticacao",
-    "\\src\\autenticacao\\entities",
-    "\\src\\autenticacao\\types",
     "\\src\\database",
-    "\\src\\user",
-    "\\test"
+    "\\src\\database\\entities",
+    "\\src\\pieces",
+    "\\src\\pieces\\dto",
+    "\\src\\pieces\\entities",
+    "\\src\\user\\dto",
+    "\\src\\user\\entities"
   ],
-  "SelectedNode": "\\src\\autenticacao\\autenticacao.service.ts",
+  "SelectedNode": "\\src\\pieces\\pieces.service.ts",
   "PreviewInSolutionExplorer": false
 }

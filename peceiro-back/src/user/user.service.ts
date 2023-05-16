@@ -44,7 +44,10 @@ export class UserService {
     };
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
+  async update(
+    id: number,
+    updateUserDto: UpdateUserDto,
+  ): Promise<serverResponse> {
     const user = await this.getUser(id);
     if (!user) {
       throw new NotFoundException('Humm!', 'Usuário não encontrado.');
