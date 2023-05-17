@@ -8,18 +8,13 @@ const vUseAlert = async (type: typesAlert, message: string) => {
     const sucessAudio = new Audio(SuccessAudio);
     const errorAudio = new Audio(ErrorAudio)
 
-    await sucessAudio.load()
-    await errorAudio.load()
-
     if (type === "success") {
-        await sucessAudio.play()
-
-    }
-    if (type !== "success") {
-        await errorAudio.play()
-    }
-
-    if (type === "success") {
+        try {
+            await sucessAudio.load()
+            await sucessAudio.play()
+        } catch (e) {
+            // pass
+        }
         return toast.success(message, {
             position: "top-right",
             autoClose: 1200,
@@ -31,7 +26,14 @@ const vUseAlert = async (type: typesAlert, message: string) => {
             theme: "dark",
             icon: "🐟"
         })
-    } else if (type === "error") {
+    }
+    if (type === "error") {
+        try {
+            await errorAudio.load()
+            await errorAudio.play()
+        } catch (e) {
+            // pass
+        }
         return toast.error(message, {
             position: "top-right",
             autoClose: 1200,
@@ -43,7 +45,14 @@ const vUseAlert = async (type: typesAlert, message: string) => {
             theme: "dark",
             icon: "❌"
         })
-    } else {
+    }
+    if (type === "warning") {
+        try {
+            await errorAudio.load()
+            await errorAudio.play()
+        } catch (e) {
+            // pass
+        }
         return toast.warning(message, {
             position: "top-right",
             autoClose: 1200,

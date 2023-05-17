@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+
 :root {
   --toastify-color-success: #06f5b9;
   --toastify-color-dark: #a8e6ce;

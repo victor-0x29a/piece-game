@@ -18,6 +18,12 @@ import { AuthGuardAdmin } from '../autenticacao/autenticacao.admin.guard';
 @Controller('pieces')
 export class PiecesController {
   constructor(private readonly piecesService: PiecesService) {}
+
+  @Get('preset')
+  getpreset() {
+    return this.piecesService.preset();
+  }
+
   @UseGuards(AuthGuardAdmin)
   @Post()
   create(@Body() createPieceDto: CreatePieceDto) {

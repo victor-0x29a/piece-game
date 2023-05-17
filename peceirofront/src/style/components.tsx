@@ -21,7 +21,7 @@ box-shadow: 0 0 1em black;
 `
 
 export const App = styled.div`
-margin-left: 220px;
+margin-left: 161px;
 height: 100vh;
 overflow-x: hidden;
 overflow-y: scroll;

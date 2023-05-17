@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Box } from '@material-ui/core'
+import { Box } from '@mui/material'
 import RegisterFormComponent from './components/form.component';
 import vUseFetch from '../../customHooks/vUseFetch';
 import { UserCreateDTO } from '../../dto/user.dto';

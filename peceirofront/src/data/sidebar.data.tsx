@@ -1,10 +1,10 @@
-import DraftsIcon from '@material-ui/icons/Drafts';
-import ExtensionIcon from '@material-ui/icons/Extension';
-import GamesIcon from '@material-ui/icons/Games';
-import AccountTreeIcon from '@material-ui/icons/AccountTree';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import DraftsIcon from '@mui/icons-material/Drafts';
+import ExtensionIcon from '@mui/icons-material/Extension';
+import GamepadIcon from '@mui/icons-material/Gamepad';
+import ContactsIcon from '@mui/icons-material/Contacts';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 
 type item = {
     name: string,
@@ -23,7 +23,7 @@ export const listItems: item[] = [
     {
         name: "Playground",
         href: "/playground",
-        image: <GamesIcon />,
+        image: <GamepadIcon />,
         logged: true
     },
     {
@@ -35,7 +35,7 @@ export const listItems: item[] = [
     {
         name: "Minha conta",
         href: "/profile",
-        image: <AccountTreeIcon />,
+        image: <ContactsIcon />,
         logged: true
     },
     {
@@ -53,7 +53,7 @@ export const listItems: item[] = [
     {
         name: "Cadastrar",
         href: "/register",
-        image: <AddCircleOutlineIcon />,
+        image: <PersonAddIcon />,
         logged: false
     },
 ]

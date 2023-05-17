@@ -16,3 +16,8 @@ export type responseFetch = {
     error: boolean
     data: props
 }
+
+export type decodedToken = {
+    id: number;
+    authLevel: number;
+};

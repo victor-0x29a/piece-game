@@ -3,13 +3,14 @@ import React from 'react'
 import { useFormik } from "formik";
 import * as yup from "yup";
 import LoginFormComponent from './components/form.component'
-import { Box } from '@material-ui/core'
+import { Box } from '@mui/material'
 import vUseAlert from '../../customHooks/vUseAlert';
 import vUseFetch from '../../customHooks/vUseFetch';
 import { LoginDTO } from '../../dto/user.dto';
 import { connect } from 'react-redux';
 import { account, stateType } from '../../store/types/state.type';
 import { propsIndex } from './types/props.login'
+import vUseDecoded from '../../customHooks/vUseDecoded';
 
 const MapStateToProps = (state: stateType) => ({
     account: state.account
@@ -48,10 +49,12 @@ const LoginPage = ({ account, setAccount }: propsIndex) => {
                 await vUseAlert('success', data.data.message)
                 Formulario.setValues({ email: '', password: '' })
                 Formulario.setTouched({ email: false, password: false })
+                const decoded = vUseDecoded(data.data.data["token"])
                 setAccount({
                     logged: true,
                     token: data.data.data["token"],
                     expiresIn: data.data.data["expiresIn"],
+                    authLevel: decoded.authLevel,
                     info: {
                         name: data.data.data["name"],
                         email: data.data.data["email"],

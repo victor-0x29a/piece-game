@@ -13,13 +13,13 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <ReduxProvier store={store}>
-      <GlobalStyle />
-      <BrowserRouter>
-        <Rotas />
-      </BrowserRouter>
-      <ToastContainer />
-    </ReduxProvier>
-  </React.StrictMode>,
+
+  <ReduxProvier store={store}>
+    <GlobalStyle />
+    <BrowserRouter>
+      <Rotas />
+    </BrowserRouter>
+    <ToastContainer />
+  </ReduxProvier>
+
 )

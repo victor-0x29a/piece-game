@@ -1,23 +1,14 @@
 import React from 'react'
 
 import { propsLogin } from '../types/props.login'
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 import { FormLogin } from '../../../style/components';
-import { withStyles } from '@material-ui/core';
-import { Box } from '@material-ui/core'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
-const ColorButton = withStyles(() => ({
-    root: {
-        color: "white",
-        backgroundColor: "#6cbdb5",
-        '&:hover': {
-            backgroundColor: "#00b5b9",
-        },
-    },
-}))(Button);
-const LoginFormComponent = ({ formik }: propsLogin) => {
+import { Box } from '@mui/material'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
+
+const LoginFormComponent = ({ formik }: propsLogin) => {
     const mobile = useMediaQuery("(max-width: 600px)")
     return <FormLogin onSubmit={formik.handleSubmit}>
         <Box component="div" style={{
@@ -55,9 +46,15 @@ const LoginFormComponent = ({ formik }: propsLogin) => {
             style={{ marginTop: "2rem", marginBottom: "2rem" }}
         />
 
-        <ColorButton variant="contained" color="primary" type="submit">
+        <Button variant="contained" color="primary" type="submit" sx={{
+            color: "white",
+            backgroundColor: "#6cbdb5",
+            '&:hover': {
+                backgroundColor: "#00b5b9",
+            },
+        }}>
             Entrar
-        </ColorButton>
+        </Button>
 
 
     </FormLogin>

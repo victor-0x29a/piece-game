@@ -1,11 +1,11 @@
 import React from 'react'
 
 import { SideBar } from '../style/components'
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import { useMediaQuery } from '@material-ui/core';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { listItems } from '../data/sidebar.data'
 import { connect } from 'react-redux'
 import { account, stateType } from '../store/types/state.type';

@@ -9,6 +9,7 @@ import { Piece } from '../database/entities/piece.entity';
 import { CreatePieceDto } from './dto/create-piece.dto';
 import { UpdatePieceDto } from './dto/update-piece.dto';
 import { PieceValidationCreate } from './entities/piece.entity';
+import { categories } from '../app.constant';
 
 @Injectable()
 export class PiecesService {
@@ -27,8 +28,21 @@ export class PiecesService {
     if (isValid.success === false) {
       throw new NotAcceptableException('Opa!', isValid.error.errors[0].message);
     }
+
+    let category = { valid: false, index: 0 };
+    categories.forEach((item, index) => {
+      if (item[0] === createPiece.category.id) {
+        category = { valid: true, index: index };
+      }
+    });
+    if (!category.valid) {
+      throw new NotFoundException('Ops.', 'Categoria não encontrada.');
+    }
     return await Piece.create({
-      product: createPiece.product,
+      product: {
+        id: createPiece.category.id,
+        name: categories[category.index][1],
+      },
       caregory: createPiece.category,
     })
       .then(() => {
@@ -109,5 +123,15 @@ export class PiecesService {
           'Tente novamente mais tarde.',
         );
       });
+  }
+
+  async preset(): Promise<serverResponse> {
+    return {
+      error: false,
+      message: 'Preset dos itens.',
+      data: {
+        categories: categories,
+      },
+    };
   }
 }

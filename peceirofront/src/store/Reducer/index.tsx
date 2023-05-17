@@ -6,6 +6,7 @@ export const appReducer = (state: stateType = {
         logged: false,
         token: null,
         expiresIn: 0,
+        authLevel: 0,
         info: {
             name: "Nenhum",
             email: "Nenhum",
