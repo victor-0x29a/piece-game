@@ -26,6 +26,23 @@ export const appReducer = (state: stateType = {
                 ...state,
                 pieces_atualization: Math.floor(Math.random() * 99999)
             }
+        case "logOut": {
+            return {
+                ...state,
+                pieces_atualization: 0,
+                account: {
+                    logged: false,
+                    token: null,
+                    expiresIn: 0,
+                    authLevel: 0,
+                    info: {
+                        name: "Nenhum",
+                        email: "Nenhum",
+                        telefone: "Nenhum"
+                    }
+                }
+            }
+        }
         default:
             return state
     }
