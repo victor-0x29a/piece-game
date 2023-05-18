@@ -12,7 +12,7 @@ export const PieceValidationCreate = z.object({
   }),
   product: z
     .string()
-    .min(12, 'O nome deve ter no mínimo 12 caracteres.')
-    .max(64, 'O nome deve ter no máximo 128 caracteres.'),
+    .min(4, 'O nome deve ter no mínimo 4 caracteres.')
+    .max(64, 'O nome deve ter no máximo 64 caracteres.'),
 });
 // 'Categoria inválida.'
