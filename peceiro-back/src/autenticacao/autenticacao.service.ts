@@ -60,7 +60,7 @@ export class AutenticacaoService {
       .then(() => {
         return {
           error: false,
-          message: 'Usuário criado.',
+          message: 'Cadastro efetuado.',
           data: Body,
         };
       })

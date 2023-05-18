@@ -9,14 +9,17 @@ const PieceHeroComponent = () => {
     return <Box style={{
         width: "100%",
         height: "auto",
-        textAlign: "center",
+        textAlign: "left",
         margin: "0",
-        marginBottom: "2.75rem"
+        marginTop: "2.75rem",
+        marginBottom: "2.75rem",
+        marginLeft: "2.75rem"
     }}>
         <h2 style={{
             fontSize: !mobile ? "2rem" : "1.4rem",
-            fontWeight: "600"
-        }}><HandymanIcon /> Gerenciar componentes!</h2>
+            fontWeight: "600",
+            fontFamily: "arial"
+        }}><HandymanIcon /> Todos os componentes</h2>
     </Box>
 }
 

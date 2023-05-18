@@ -13,7 +13,7 @@ const LoadingComponent = ({ state }: thisProps) => {
     return state ? <Box style={{
         top: "0",
         left: "0",
-        zIndex: "99",
+        zIndex: "999",
         backdropFilter: "blur(25px)",
         position: "fixed",
         display: "flex",

@@ -7,10 +7,11 @@
     "\\src\\database",
     "\\src\\database\\entities",
     "\\src\\pieces",
+    "\\src\\pieces\\dto",
     "\\src\\user",
     "\\src\\user\\dto",
     "\\src\\user\\entities"
   ],
-  "SelectedNode": "\\src\\autenticacao\\types\\auth.type.ts",
+  "SelectedNode": "\\src\\pieces\\pieces.service.ts",
   "PreviewInSolutionExplorer": false
 }

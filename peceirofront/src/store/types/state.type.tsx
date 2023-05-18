@@ -9,6 +9,10 @@ export type account = {
         telefone: string
     }
 }
+
+export type pieces_atualization = number
+
 export type stateType = {
+    pieces_atualization: number
     account: account
 }

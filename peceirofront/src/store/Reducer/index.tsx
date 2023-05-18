@@ -2,6 +2,7 @@ import { action } from '../types/action.type'
 import { stateType } from '../types/state.type'
 
 export const appReducer = (state: stateType = {
+    pieces_atualization: 0,
     account: {
         logged: false,
         token: null,
@@ -19,6 +20,11 @@ export const appReducer = (state: stateType = {
             return {
                 ...state,
                 account: action.payload
+            }
+        case "att_pieces":
+            return {
+                ...state,
+                pieces_atualization: Math.floor(Math.random() * 99999)
             }
         default:
             return state

@@ -8,20 +8,35 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-
+import PieceDialogComponent from './dialog.component';
+import useMediaQuery from '@mui/material/useMediaQuery'
 import { columns } from '../../../data/piece.data'
 import { piecePropsComponent } from '../types/props.pieces';
+import { CreatePieceDto } from '../../../dto/piece.dto';
 
 
-const PieceTableComponent = ({ pieces }: piecePropsComponent) => {
+const PieceTableComponent = ({ pieces, categories, setLoading }: piecePropsComponent) => {
+    const [open, setOpen] = useState(false)
+    const [select, setSelect] = useState<CreatePieceDto>({
+        id: 0,
+        product: "Nenhum",
+        category: {
+            id: 0,
+            name: "Nenhuma"
+        }
+    })
     const [page, setPage] = useState(0)
+    const mobile = useMediaQuery("(max-width: 612px)")
+
+    const openDialog = (Piece: CreatePieceDto) => {
+        if (open) return false
+        setSelect(Piece)
+        setOpen(true)
+    }
     return <>
-        <Paper sx={{ width: '60%', overflow: 'hidden', height: "440px" }}>
+        <Paper sx={{ width: mobile ? '90%' : "60%", overflow: 'hidden', height: "440px", boxShadow: !mobile ? "0 0 1em black" : "0 0 0.1em black" }}>
             <TableContainer sx={{ maxHeight: 440 }}>
                 <Table stickyHeader aria-label="sticky table" sx={{
-                    ".MuiTable-root": {
-                        backgroundColor: "#6cbdb5"
-                    }
                 }}>
                     <TableHead>
                         <TableRow>
@@ -42,8 +57,8 @@ const PieceTableComponent = ({ pieces }: piecePropsComponent) => {
                                 <TableRow hover role="checkbox" tabIndex={-1} key={piece.id}>
                                     {columns.map((column) => {
                                         return (
-                                            <TableCell key={column.id} align={column.align}>
-
+                                            <TableCell key={column.id} align={"center"} onClick={() => openDialog(piece)}>
+                                                {column.label === "Nome" ? piece.product : piece.category.name}
                                             </TableCell>
                                         );
                                     })}
@@ -62,6 +77,7 @@ const PieceTableComponent = ({ pieces }: piecePropsComponent) => {
                 onPageChange={(event: unknown, page: number) => setPage(page)}
             />
         </Paper>
+        <PieceDialogComponent Piece={select} Open={open} setOpen={setOpen} key={1} Categories={categories} setLoading={setLoading} />
     </>
 }
 

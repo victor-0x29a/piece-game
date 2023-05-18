@@ -39,16 +39,17 @@ export class PiecesService {
       throw new NotFoundException('Ops.', 'Categoria não encontrada.');
     }
     return await Piece.create({
-      product: {
-        id: createPiece.category.id,
+      product: createPiece.product,
+      category: {
+        id: categories[category.index][0],
         name: categories[category.index][1],
       },
-      caregory: createPiece.category,
     })
       .then(() => {
         return true;
       })
       .catch((err: Error) => {
+        console.log(err);
         throw new InternalServerErrorException(
           'Ops.',
           'Tente novamente mais tarde.',

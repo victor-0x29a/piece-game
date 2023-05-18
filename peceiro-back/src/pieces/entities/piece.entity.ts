@@ -6,7 +6,7 @@ export const PieceValidationCreate = z.object({
   category: z.object({
     name: z
       .string()
-      .min(12, 'O nome da categoria deve ter no mínimo 4 caracteres.')
+      .min(4, 'O nome da categoria deve ter no mínimo 4 caracteres.')
       .max(64, 'O nome da categoria deve ter no máximo 28 caracteres.'),
     id: z.number(),
   }),

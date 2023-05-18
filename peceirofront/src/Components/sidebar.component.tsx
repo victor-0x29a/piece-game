@@ -40,16 +40,28 @@ const SideBarComponent = ({ account }: thisProps) => {
                     }} key={index}>
                         {
                             item.logged && account.logged && (
-                                <ListItem button key={index}
-                                    onClick={() => (navigate(item.href))} alignItems='center' style={{
-                                        justifyContent: "center",
-                                    }}>
-                                    {mobile && item.image}
-                                    {!mobile && <ListItemIcon>
-                                        {item.image}
-                                    </ListItemIcon>}
-                                    {!mobile && <ListItemText primary={item.name} />}
-                                </ListItem>
+                                <>
+                                    {item.href.includes("admin") && account.authLevel > 1 && <ListItem button key={index}
+                                        onClick={() => (navigate(item.href))} alignItems='center' style={{
+                                            justifyContent: "center",
+                                        }}>
+                                        {mobile && item.image}
+                                        {!mobile && <ListItemIcon>
+                                            {item.image}
+                                        </ListItemIcon>}
+                                        {!mobile && <ListItemText primary={item.name} />}
+                                    </ListItem>}
+                                    {!item.href.includes("admin") && account.authLevel >= 1 && <ListItem button key={index}
+                                        onClick={() => (navigate(item.href))} alignItems='center' style={{
+                                            justifyContent: "center",
+                                        }}>
+                                        {mobile && item.image}
+                                        {!mobile && <ListItemIcon>
+                                            {item.image}
+                                        </ListItemIcon>}
+                                        {!mobile && <ListItemText primary={item.name} />}
+                                    </ListItem>}
+                                </>
                             )
                         }
                         {

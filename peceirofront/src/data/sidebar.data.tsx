@@ -5,6 +5,7 @@ import ContactsIcon from '@mui/icons-material/Contacts';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import HandymanIcon from '@mui/icons-material/Handyman';
 
 type item = {
     name: string,
@@ -19,6 +20,12 @@ export const listItems: item[] = [
         href: "/pieces",
         image: <ExtensionIcon />,
         logged: false
+    },
+    {
+        name: "Componentes",
+        href: "/admin/piece",
+        image: <HandymanIcon />,
+        logged: true
     },
     {
         name: "Playground",
