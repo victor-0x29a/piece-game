@@ -92,7 +92,7 @@ const PieceTableComponent = ({ pieces, categories, setLoading }: piecePropsCompo
                     height: "40px",
                     marginLeft: "10px"
                 }}>
-                    Adicionar
+                    Criar
                 </Button>
                 <TablePagination
                     rowsPerPageOptions={[]}

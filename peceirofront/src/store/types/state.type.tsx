@@ -6,7 +6,7 @@ export type account = {
     info: {
         name: string
         email: string
-        telefone: string
+        telefone: number | null
     }
 }
 

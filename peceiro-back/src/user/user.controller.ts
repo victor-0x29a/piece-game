@@ -7,10 +7,12 @@ import {
   Delete,
   UseGuards,
   NotAcceptableException,
+  Req,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuardAdmin } from '../autenticacao/autenticacao.admin.guard';
+import { AuthGuard } from '../autenticacao/autenticacao.member.guard';
 
 @Controller('user')
 export class UserController {
@@ -44,5 +46,11 @@ export class UserController {
       throw new NotAcceptableException('Opa.', 'ID inválido.');
     }
     return this.userService.remove(Number(id));
+  }
+
+  @UseGuards(AuthGuard)
+  @Patch('account/update')
+  getMe(@Req() req: Request, @Body() corpo) {
+    return this.userService.updateMe(req, corpo);
   }
 }

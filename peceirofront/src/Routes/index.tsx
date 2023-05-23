@@ -10,7 +10,7 @@ import { Route, Routes } from "react-router-dom";
 import BlockRoute from "./block";
 import ProtectRoute from "./protect";
 import LogoutPage from "../Pages/logout";
-
+import MyAccountPage from "../Pages/myaccount";
 
 const Rotas = () => {
 
@@ -24,6 +24,7 @@ const Rotas = () => {
                     <Route path="/register" element={<BlockRoute><RegisterPage /></BlockRoute>} />
                     <Route path="/admin/piece" element={<ProtectRoute><PiecePage /></ProtectRoute>} />
                     <Route path="/logout" element={<ProtectRoute><LogoutPage /></ProtectRoute>} />
+                    <Route path="/profile" element={<ProtectRoute><MyAccountPage /></ProtectRoute>} />
                 </Routes>
             </App>
         </ >

@@ -2,13 +2,15 @@ import {
   Injectable,
   NotFoundException,
   NotAcceptableException,
+  InternalServerErrorException,
 } from '@nestjs/common';
 import { serverResponse } from '../app.constant';
+import jwtDecode from 'jwt-decode';
 import { User } from '../database/entities/user.entity';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserValidationUpdate } from './entities/user.entity';
+import { decodedToken } from '../autenticacao/types/auth.type';
 
-@Injectable()
 export class UserService {
   private async getUser(id: number | false) {
     if (id !== false) {
@@ -54,7 +56,10 @@ export class UserService {
     }
     const isValid = await UserValidationUpdate.safeParseAsync(updateUserDto);
     if (isValid.success === false) {
-      throw new NotAcceptableException('Opa.', isValid.error.errors[0].message);
+      throw new NotAcceptableException(
+        'Opa.',
+        `${isValid.error.errors[0].message}`,
+      );
     }
     return await User.update(
       {
@@ -104,6 +109,51 @@ export class UserService {
           message: 'Houve um erro interno.',
           data: [],
         };
+      });
+  }
+
+  async updateMe(
+    req: Request,
+    updateUserDto: UpdateUserDto,
+  ): Promise<serverResponse> {
+    const thisUser: decodedToken | any = jwtDecode(
+      req.headers['authorization'],
+    );
+    const isValid = await UserValidationUpdate.safeParseAsync(updateUserDto);
+    if (isValid.success === false) {
+      throw new NotAcceptableException('Opa.', isValid.error.errors[0].message);
+    }
+    return await User.update(
+      {
+        email: updateUserDto.email,
+        name: updateUserDto.name,
+        phone: updateUserDto.phone,
+      },
+      {
+        where: {
+          id: thisUser.id,
+        },
+      },
+    )
+      .then(() => {
+        return {
+          error: false,
+          message: 'Suas informações foram atualizadas.',
+          data: {
+            token: {
+              ...thisUser,
+            },
+            user: {
+              ...updateUserDto,
+            },
+          },
+        };
+      })
+      .catch((err: Error) => {
+        throw new InternalServerErrorException(
+          'Hum.',
+          'Houve um erro interno, tente novamente mais tarde.',
+        );
       });
   }
 }

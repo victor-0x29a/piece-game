@@ -11,7 +11,7 @@ export const appReducer = (state: stateType = {
         info: {
             name: "Nenhum",
             email: "Nenhum",
-            telefone: "Nenhum"
+            telefone: null
         }
     }
 }, action: action) => {
@@ -43,6 +43,11 @@ export const appReducer = (state: stateType = {
                 }
             }
         }
+        case "change_account":
+            state.account.info = action.payload
+            return {
+                ...state
+            }
         default:
             return state
     }

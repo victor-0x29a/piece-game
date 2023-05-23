@@ -58,7 +58,7 @@ const LoginPage = ({ account, setAccount }: propsIndex) => {
                     info: {
                         name: data.data.data["name"],
                         email: data.data.data["email"],
-                        telefone: data.data.data["phone"]
+                        telefone: Number(data.data.data["phone"])
                     }
                 })
             }).catch(async (err) => {
