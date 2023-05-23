@@ -16,16 +16,16 @@ type item = {
 
 export const listItems: item[] = [
     {
-        name: "Peças",
-        href: "/pieces",
-        image: <ExtensionIcon />,
-        logged: false
-    },
-    {
         name: "Componentes",
         href: "/admin/piece",
         image: <HandymanIcon />,
         logged: true
+    },
+    {
+        name: "Peças",
+        href: "/pieces",
+        image: <ExtensionIcon />,
+        logged: false
     },
     {
         name: "Playground",
