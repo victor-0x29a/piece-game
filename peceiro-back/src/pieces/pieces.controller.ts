@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   HttpCode,
+  NotAcceptableException,
 } from '@nestjs/common';
 import { PiecesService } from './pieces.service';
 import { CreatePieceDto } from './dto/create-piece.dto';
@@ -40,6 +41,9 @@ export class PiecesController {
   @HttpCode(200)
   @Get(':id')
   findOne(@Param('id') id: string) {
+    if (isNaN(Number(id))) {
+      throw new NotAcceptableException('Opa.', 'ID inválido.');
+    }
     return this.piecesService.findOne(+id);
   }
 
@@ -47,12 +51,18 @@ export class PiecesController {
   @HttpCode(204)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePieceDto: UpdatePieceDto) {
+    if (isNaN(Number(id))) {
+      throw new NotAcceptableException('Opa.', 'ID inválido.');
+    }
     return this.piecesService.update(+id, updatePieceDto);
   }
   @UseGuards(AuthGuardAdmin)
   @HttpCode(204)
   @Delete(':id')
   remove(@Param('id') id: string) {
+    if (isNaN(Number(id))) {
+      throw new NotAcceptableException('Opa.', 'ID inválido.');
+    }
     return this.piecesService.remove(+id);
   }
 }

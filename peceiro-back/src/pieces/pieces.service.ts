@@ -47,7 +47,6 @@ export class PiecesService {
         return true;
       })
       .catch((err: Error) => {
-        console.log(err);
         throw new InternalServerErrorException(
           'Ops.',
           'Tente novamente mais tarde.',
@@ -65,6 +64,9 @@ export class PiecesService {
   }
 
   async findOne(id: number): Promise<serverResponse> {
+    if (id < 0 || typeof id !== 'number') {
+      throw new NotAcceptableException('Ops', 'Confira o ID.');
+    }
     const Pecas = await this.getOne(id);
     if (!Pecas) {
       throw new NotFoundException('Ops', 'Componente não encontrado.');
@@ -80,6 +82,10 @@ export class PiecesService {
     const isValid = await PieceValidationCreate.safeParseAsync(updatePieceDto);
     if (isValid.success === false) {
       throw new NotAcceptableException('Opa!', isValid.error.errors[0].message);
+    }
+    const Pecas = await this.getOne(id);
+    if (!Pecas) {
+      throw new NotFoundException('Ops', 'Componente não encontrado.');
     }
     await Piece.update(
       {

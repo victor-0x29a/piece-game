@@ -11,7 +11,7 @@ describe('UserService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [AutenticacaoModule, DatabaseModule],
+      imports: [DatabaseModule, AutenticacaoModule],
       controllers: [UserController],
       providers: [UserService, AutenticacaoService],
     }).compile();
@@ -23,6 +23,9 @@ describe('UserService', () => {
     const allData = await service.findAll();
     expect(allData.data.length).toBe(0);
     expect(async () => await service.findOne(1)).rejects.toThrowError(
+      NotFoundException,
+    );
+    expect(async () => await service.remove(1)).rejects.toThrowError(
       NotFoundException,
     );
     return expect(
