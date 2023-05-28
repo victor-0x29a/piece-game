@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  NotAcceptableException,
+} from '@nestjs/common';
 import { MainGameService } from './main-game.service';
 import { CreateMainGameDto } from './dto/create-main-game.dto';
 import { UpdateMainGameDto } from './dto/update-main-game.dto';
@@ -19,16 +28,28 @@ export class MainGameController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
+    if (isNaN(Number(id))) {
+      throw new NotAcceptableException('Opa.', 'ID inválido.');
+    }
     return this.mainGameService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMainGameDto: UpdateMainGameDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateMainGameDto: UpdateMainGameDto,
+  ) {
+    if (isNaN(Number(id))) {
+      throw new NotAcceptableException('Opa.', 'ID inválido.');
+    }
     return this.mainGameService.update(+id, updateMainGameDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
+    if (isNaN(Number(id))) {
+      throw new NotAcceptableException('Opa.', 'ID inválido.');
+    }
     return this.mainGameService.remove(+id);
   }
 }

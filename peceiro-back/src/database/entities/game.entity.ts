@@ -14,6 +14,6 @@ export class Game extends Model {
   @Column({ allowNull: false, type: DataType.JSON })
   sorted: object;
 
-  @Column({ allowNull: false, type: DataType.DATE })
-  day: Date;
+  @Column({ allowNull: false, type: DataType.STRING })
+  day: string;
 }
