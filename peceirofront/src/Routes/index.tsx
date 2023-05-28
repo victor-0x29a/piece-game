@@ -11,6 +11,7 @@ import BlockRoute from "./block";
 import ProtectRoute from "./protect";
 import LogoutPage from "../Pages/logout";
 import MyAccountPage from "../Pages/myaccount";
+import PiecesPage from "../Pages/pieces";
 
 const Rotas = () => {
 
@@ -22,6 +23,7 @@ const Rotas = () => {
                 <Routes>
                     <Route path="/login" element={<BlockRoute><LoginPage /></BlockRoute>} />
                     <Route path="/register" element={<BlockRoute><RegisterPage /></BlockRoute>} />
+                    <Route path="/pieces" element={<ProtectRoute><PiecesPage /></ProtectRoute>} />
                     <Route path="/admin/piece" element={<ProtectRoute><PiecePage /></ProtectRoute>} />
                     <Route path="/logout" element={<ProtectRoute><LogoutPage /></ProtectRoute>} />
                     <Route path="/profile" element={<ProtectRoute><MyAccountPage /></ProtectRoute>} />

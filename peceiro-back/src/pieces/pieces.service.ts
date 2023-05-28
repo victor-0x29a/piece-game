@@ -1,5 +1,4 @@
 import {
-  Injectable,
   InternalServerErrorException,
   NotAcceptableException,
   NotFoundException,
@@ -11,7 +10,6 @@ import { UpdatePieceDto } from './dto/update-piece.dto';
 import { PieceValidationCreate } from './entities/piece.entity';
 import { categories } from '../app.constant';
 
-@Injectable()
 export class PiecesService {
   private async getOne(id: number): Promise<Piece | false> {
     const data = await Piece.findOne({ where: { id: id } });

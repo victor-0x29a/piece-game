@@ -1,9 +1,10 @@
-import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { NotFoundException } from '@nestjs/common';
 import { AutenticacaoModule } from '../autenticacao/autenticacao.module';
 import { DatabaseModule } from '../database/database.module';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
+import { AutenticacaoService } from '../autenticacao/autenticacao.service';
 
 describe('UserService', () => {
   let service: UserService;
@@ -12,7 +13,7 @@ describe('UserService', () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [AutenticacaoModule, DatabaseModule],
       controllers: [UserController],
-      providers: [UserService],
+      providers: [UserService, AutenticacaoService],
     }).compile();
 
     service = module.get<UserService>(UserService);
@@ -24,7 +25,7 @@ describe('UserService', () => {
     expect(async () => await service.findOne(1)).rejects.toThrowError(
       NotFoundException,
     );
-    expect(
+    return expect(
       async () =>
         await service.update(1, {
           email: 'teste@teste.com',

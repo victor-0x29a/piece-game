@@ -1,5 +1,4 @@
 import {
-  Injectable,
   NotFoundException,
   NotAcceptableException,
   InternalServerErrorException,
@@ -13,8 +12,8 @@ import { decodedToken } from '../autenticacao/types/auth.type';
 
 export class UserService {
   private async getUser(id: number | false) {
-    if (id !== false) {
-      return await User.findOne({
+    if (typeof id === 'number') {
+      return User.findOne({
         where: { id: id },
         attributes: { exclude: ['password', 'createdAt', 'updatedAt'] },
       });

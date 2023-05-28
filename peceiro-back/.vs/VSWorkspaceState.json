@@ -9,8 +9,9 @@
     "\\src\\pieces",
     "\\src\\pieces\\entities",
     "\\src\\user",
-    "\\src\\user\\entities"
+    "\\src\\user\\entities",
+    "\\test"
   ],
-  "SelectedNode": "\\src\\user\\user.module.ts",
+  "SelectedNode": "\\src\\user\\user.controller.spec.ts",
   "PreviewInSolutionExplorer": false
 }
