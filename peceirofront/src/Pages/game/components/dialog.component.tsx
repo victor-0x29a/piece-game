@@ -18,6 +18,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import vUseDate from '../../../customHooks/vUseDate';
 
 const GameDialogComponent = ({ Open, setOpen, Account, setLoading, Atualization, Game }: gameDialogPropsComponent) => {
     const [title, setTitle] = React.useState("")
@@ -38,29 +39,34 @@ const GameDialogComponent = ({ Open, setOpen, Account, setLoading, Atualization,
         }),
         onSubmit: async (values, Formulario) => {
             setLoading(true)
+            let data = dayjs(values.day).toISOString()
             await vUseFetch({
-                endpoint: `/pieces`,
-                method: "POST",
+                endpoint: `/main-game/${Game.id}`,
+                method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
                     "authorization": Account.token
                 },
-                data: null
+                data: {
+                    "title": title,
+                    "description": description,
+                    "day": data
+                }
             }).then(async (data) => {
-                //await vUseAlert('success', "Componente criado.")
-                //Formulario.setValues({ product: '' })
-                //Formulario.setTouched({ product: false })
-                //setOpen(false)
-                //setLoading(false)
-                //Atualization()
+                await vUseAlert('success', "Jogo modificado.")
+                Formulario.setValues({ title: '', description: '', day: dayjs('2023-04-17') })
+                Formulario.setTouched({ title: false, description: false })
+                setOpen(false)
+                setLoading(false)
+                Atualization()
             }).catch(async (err) => {
-                //if (err.data.error) {
-                //  await vUseAlert('error', err.data.error)
-                //} else {
-                //   await vUseAlert('error', "Entre novamente na sua conta.")
-                // }
-                // setOpen(false)
-                //setLoading(false)
+                if (err.data.error) {
+                    await vUseAlert('error', err.data.error)
+                } else {
+                    await vUseAlert('error', "Entre novamente na sua conta.")
+                }
+                setOpen(false)
+                setLoading(false)
             })
         }
     })
@@ -70,9 +76,9 @@ const GameDialogComponent = ({ Open, setOpen, Account, setLoading, Atualization,
         Formik.values.title = Game.title
         setDescription(Game.description)
         Formik.values.description = Game.description
-        setDay(dayjs(Game.day))
-        Formik.values.day = dayjs(Game.day)
-    }, [])
+        setDay(vUseDate(Game.day).lib)
+        Formik.values.day = vUseDate(Game.day).lib
+    }, [Game])
 
 
     const handleTitle = async (e: React.ChangeEvent<any>) => {
@@ -100,25 +106,25 @@ const GameDialogComponent = ({ Open, setOpen, Account, setLoading, Atualization,
     const handleDelete = async () => {
         setLoading(true)
         await vUseFetch({
-            endpoint: `/pieces/1`,
+            endpoint: `/main-game/${Game.id}`,
             method: "DELETE",
             headers: {
                 "authorization": Account.token
             },
             data: null
         }).then(async () => {
-            // await vUseAlert('warning', "Componente deletado.")
-            //setOpen(false)
-            //setLoading(false)
-            //Atualization()
+            await vUseAlert('warning', "Jogo deletado.")
+            setOpen(false)
+            setLoading(false)
+            Atualization()
         }).catch(async (err) => {
-            //if (err.data.error) {
-            //    await vUseAlert('error', err.data.error)
-            // } else {
-            //    await vUseAlert('error', "Entre novamente na sua conta.")
-            //}
-            // setOpen(false)
-            //setLoading(false)
+            if (err.data.error) {
+                await vUseAlert('error', err.data.error)
+            } else {
+                await vUseAlert('error', "Entre novamente na sua conta.")
+            }
+            setOpen(false)
+            setLoading(false)
         })
     }
 
@@ -163,13 +169,12 @@ const GameDialogComponent = ({ Open, setOpen, Account, setLoading, Atualization,
                 }}
             />
 
-
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker sx={{
                     marginTop: "1rem",
                     width: "80%"
                 }} onChange={(e: any) => handleDay(e)}
-                    label="Data do jogo" />
+                    label="Data do jogo" value={day} />
             </LocalizationProvider>
 
             <Box component={"section"} sx={{

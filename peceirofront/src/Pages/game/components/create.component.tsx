@@ -39,6 +39,7 @@ const GameCreateComponent = ({ Open, setOpen, Account, setLoading, Atualization 
         }),
         onSubmit: async (values, Formulario) => {
             setLoading(true)
+            let data = dayjs(values.day).toISOString()
             await vUseFetch({
                 endpoint: `/main-game`,
                 method: "POST",
@@ -47,9 +48,9 @@ const GameCreateComponent = ({ Open, setOpen, Account, setLoading, Atualization 
                     "authorization": Account.token
                 },
                 data: {
-                    "title": values.title,
-                    "description": values.description,
-                    "day": values.day?.toISOString()
+                    "title": title,
+                    "description": description,
+                    "day": data
                 }
             }).then(async (data) => {
                 await vUseAlert('success', "Jogo criado.")
@@ -152,7 +153,7 @@ const GameCreateComponent = ({ Open, setOpen, Account, setLoading, Atualization 
                     marginTop: "1rem",
                     width: "80%"
                 }} onChange={(e: any) => handleDay(e)}
-                    label="Data do jogo" />
+                    label="Data do jogo" value={day} />
             </LocalizationProvider>
 
             <Box component={"section"} sx={{
