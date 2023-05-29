@@ -83,7 +83,7 @@ export class MainGameService {
         message: 'Todos os sorteios.',
         data: games,
       };
-    } catch (e: Error) {
+    } catch (e) {
       throw new InternalServerErrorException(
         'Hum!',
         'Houve um erro interno, tente novamente mais tarde.',

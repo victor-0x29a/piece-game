@@ -8,33 +8,33 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import PieceDialogComponent from './dialog.component';
+import GameDialogComponent from './dialog.component';
 import useMediaQuery from '@mui/material/useMediaQuery'
-import { columns } from '../../../data/piece.data'
-import { piecePropsComponent } from '../types/props.pieces';
-import { CreatePieceDto } from '../../../dto/piece.dto';
+import { columns } from '../../../data/game.data'
+import { gamePropsComponent } from '../types/props.pieces';
 import Button from "@mui/material/Button"
 import Box from '@mui/material/Box'
-import PieceCreateComponent from './create.component';
+import GameCreateComponent from './create.component';
+import { GameDto } from '../../../dto/game.dto';
 
-const PieceTableComponent = ({ pieces, categories, setLoading }: piecePropsComponent) => {
+const GameTableComponent = ({ games, setLoading }: gamePropsComponent) => {
     const [open, setOpen] = useState(false)
     const [openCreate, setOpenCreate] = useState(false)
     const [rowsPerPage, setRowsPerPage] = useState(7);
-    const [select, setSelect] = useState<CreatePieceDto>({
+    const [select, setSelect] = useState<GameDto>({
         id: 0,
-        product: "Nenhum",
-        category: {
-            id: 0,
-            name: "Nenhuma"
-        }
+        day: "2022-22-22",
+        description: "Description",
+        sorted: {
+        },
+        title: "Title"
     })
     const [page, setPage] = useState(0)
     const mobile = useMediaQuery("(max-width: 612px)")
 
-    const openDialog = (Piece: CreatePieceDto) => {
+    const openDialog = (Game: GameDto) => {
         if (open) return false
-        setSelect(Piece)
+        setSelect(Game)
         setOpen(true)
     }
 
@@ -60,13 +60,13 @@ const PieceTableComponent = ({ pieces, categories, setLoading }: piecePropsCompo
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {pieces.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((piece, indexPiece) => {
+                        {games.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((game, indexPiece) => {
                             return (
                                 <TableRow hover role="checkbox" tabIndex={-1} key={indexPiece * 10000} >
                                     {columns.map((column, indexColumnPiece) => {
                                         return (
-                                            <TableCell align={"center"} onClick={() => openDialog(piece)} key={indexColumnPiece * 20000}>
-                                                {column.label === "Nome" ? piece.product : piece.category.name}
+                                            <TableCell align={"center"} onClick={() => openDialog(game)} key={indexColumnPiece * 20000}>
+                                                {column.label === "Título" ? game.title : game.day}
                                             </TableCell>
                                         );
                                     })}
@@ -97,16 +97,19 @@ const PieceTableComponent = ({ pieces, categories, setLoading }: piecePropsCompo
                 <TablePagination
                     rowsPerPageOptions={[]}
                     component="div"
-                    count={pieces.length}
+                    count={games.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onPageChange={(event: unknown, page: number) => setPage(page)}
                 />
             </Box>
         </Paper>
-        <PieceDialogComponent Piece={select} Open={open} setOpen={setOpen} key={500001} Categories={categories} setLoading={setLoading} />
-        <PieceCreateComponent Open={openCreate} setOpen={setOpenCreate} key={500002} Categories={categories} setLoading={setLoading} />
+
+        <GameDialogComponent Open={open} setOpen={setOpen} key={500001} setLoading={setLoading} Game={select} />
+
+
+        <GameCreateComponent Open={openCreate} setOpen={setOpenCreate} key={500002} Game={select} setLoading={setLoading} />
     </>
 }
 
-export default PieceTableComponent
+export default GameTableComponent

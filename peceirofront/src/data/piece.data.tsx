@@ -1,4 +1,5 @@
 export interface Column {
+    uuid: number
     id: 'product' | 'category';
     label: string;
     minWidth?: number;
@@ -6,6 +7,6 @@ export interface Column {
 }
 
 export const columns: Column[] = [
-    { id: 'product', label: 'Nome', minWidth: 170 },
-    { id: 'category', label: 'Categoria', minWidth: 100 },
+    { uuid: 1, id: 'product', label: 'Nome', minWidth: 170 },
+    { uuid: 2, id: 'category', label: 'Categoria', minWidth: 100 },
 ]

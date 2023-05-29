@@ -139,7 +139,7 @@ const PieceDialogComponent = ({ Piece, Open, setOpen, Categories, Account, setLo
                 onChange={(e) => setCategory(Number(e.target.value))}
             >
                 {Categories.map((category, index) => (
-                    <MenuItem key={index} value={index}>
+                    <MenuItem key={index + Math.floor(Math.random() * 1500)} value={index}>
                         {category[1]}
                     </MenuItem>
                 ))}
