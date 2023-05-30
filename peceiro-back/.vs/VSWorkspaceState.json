@@ -2,16 +2,16 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\autenticacao",
-    "\\src\\autenticacao\\types",
     "\\src\\database",
     "\\src\\database\\entities",
+    "\\src\\main-game",
+    "\\src\\main-game\\dto",
+    "\\src\\main-game\\entities",
     "\\src\\pieces",
     "\\src\\pieces\\entities",
     "\\src\\user",
-    "\\src\\user\\entities",
-    "\\test"
+    "\\src\\user\\entities"
   ],
-  "SelectedNode": "\\src\\pieces\\pieces.service.spec.ts",
+  "SelectedNode": "\\src\\main-game\\main-game.service.ts",
   "PreviewInSolutionExplorer": false
 }
