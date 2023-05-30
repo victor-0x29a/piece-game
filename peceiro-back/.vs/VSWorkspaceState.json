@@ -12,6 +12,6 @@
     "\\src\\user",
     "\\src\\user\\entities"
   ],
-  "SelectedNode": "\\src\\main-game\\main-game.service.ts",
+  "SelectedNode": "\\src\\pieces\\entities\\piece.entity.ts",
   "PreviewInSolutionExplorer": false
 }

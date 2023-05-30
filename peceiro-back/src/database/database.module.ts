@@ -4,6 +4,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { DatabaseService } from './database.service';
 import { Game } from './entities/game.entity';
 import { Piece } from './entities/piece.entity';
+import { Play } from './entities/play.entity';
 import { User } from './entities/user.entity';
 
 @Module({
@@ -31,7 +32,7 @@ import { User } from './entities/user.entity';
         process.env.NODE_ENV !== 'test'
           ? Number(process.env.DATABASE_PORT)
           : Number(process.env.DATABASETEST_PORT),
-      models: [User, Piece, Game],
+      models: [User, Piece, Game, Play],
       autoLoadModels: true,
       synchronize: true,
       sync: { force: process.env.NODE_ENV == 'test' },

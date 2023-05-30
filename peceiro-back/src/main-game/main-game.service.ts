@@ -16,7 +16,10 @@ import {
   UpdateMainGameDto,
 } from './dto/update-main-game.dto';
 import { categories } from '../app.constant';
-import { sorteds } from './entities/main-game.entity';
+import { GamesPerProfile, sorteds } from './entities/main-game.entity';
+import jwtDecode from 'jwt-decode';
+import { decodedToken } from '../autenticacao/types/auth.type';
+import { Play } from '../database/entities/play.entity';
 
 @Injectable()
 export class MainGameService {
@@ -77,7 +80,9 @@ export class MainGameService {
 
   async findAll(): Promise<serverResponse> {
     try {
-      const games = await Game.findAll();
+      const games = await Game.findAll({
+        attributes: { exclude: ['createdAt', 'updatedAt'] },
+      });
       return {
         error: false,
         message: 'Todos os sorteios.',
@@ -174,4 +179,53 @@ export class MainGameService {
         };
       });
   }
+
+  // Play area
+  async getAllGames(req: Request): Promise<serverResponse> {
+    const ME: decodedToken = jwtDecode(req.headers['authorization']);
+    const games = await Game.findAll({
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+    });
+    const PerProfile: GamesPerProfile[] = [];
+    games.forEach(async (item) => {
+      const players = await Play.count({ where: { gameID: item.id } });
+      const mePlayed = await Play.findOne({
+        where: { gameID: item.id, userID: ME.id },
+      });
+      // eslint-disable-next-line prefer-const
+      let stats = {
+        played: false,
+        playedStats: null,
+      };
+      if (mePlayed) {
+        (stats.played = true),
+          (stats.playedStats = {
+            date: mePlayed.date,
+          });
+      }
+      PerProfile.push({
+        title: item.title,
+        description: item.description,
+        day: item.day,
+        playersOnGame: players,
+        ...stats,
+      });
+    });
+    return {
+      error: false,
+      message: 'Jogos de acordo com seu perfil.',
+      data: PerProfile,
+    };
+  }
+  async getMyStats(req: Request) {
+    const ME: decodedToken = jwtDecode(req.headers['authorization']);
+    const myPlayeds = await Play.findAll({
+      where: {
+        userID: ME.id,
+        include: [{ attributes: ['game'], model: Game }],
+      },
+    });
+    return myPlayeds;
+  }
+  async enterOnGame() {}
 }

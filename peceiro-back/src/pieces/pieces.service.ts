@@ -12,12 +12,17 @@ import { categories } from '../app.constant';
 
 export class PiecesService {
   private async getOne(id: number): Promise<Piece | false> {
-    const data = await Piece.findOne({ where: { id: id } });
+    const data = await Piece.findOne({
+      where: { id: id },
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+    });
     if (!data) return false;
     return data;
   }
   private async getAll(): Promise<Piece[]> {
-    const data = await Piece.findAll();
+    const data = await Piece.findAll({
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+    });
     return data;
   }
 
