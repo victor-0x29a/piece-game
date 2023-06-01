@@ -1,6 +1,8 @@
 import requests
 import json
 import os 
+import random
+import time
 
 class Simulator:
     def __init__(self):
@@ -11,6 +13,11 @@ class Simulator:
         self.authSettings = {'email': 'cartoonbr494@gmail.com', 'password': 'utk5veses'}
         self.token = ""
         self.pieces = []
+    def randomCategory(self):
+        self.category = dict(
+        id = random.randint(1, 7),
+        name = "Placa de video"
+        )
     def authenticate(self):
         request = requests.request("POST", self.url + "/autenticacao/entrar", data=self.authSettings)
         if request.status_code == 200:
@@ -21,6 +28,7 @@ class Simulator:
         try:
             x = int(input("Quantia de dados para gerar -> "))
             for i in range(x):
+                self.randomCategory()
                 self.pieces.append(dict(
                     category = self.category,
                     product = "qqqqqqqq"

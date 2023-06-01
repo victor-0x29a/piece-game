@@ -1,4 +1,6 @@
 import {
+  BadRequestException,
+  ConflictException,
   Injectable,
   InternalServerErrorException,
   NotAcceptableException,
@@ -20,10 +22,28 @@ import { GamesPerProfile, sorteds } from './entities/main-game.entity';
 import jwtDecode from 'jwt-decode';
 import { decodedToken } from '../autenticacao/types/auth.type';
 import { Play } from '../database/entities/play.entity';
+import { EnterPlay, ItemCheck } from './entities/play.entity';
+import { PlayValidationCreate } from './dto/create-play.dto';
 
 @Injectable()
 export class MainGameService {
-  sortItems = async (): Promise<sorteds> => {
+  private checkArrayWithPiecesChoiced = (array: ItemCheck[]): boolean => {
+    const categoryNecessary = [1, 2, 3, 4, 5, 6, 7];
+    let thisOk = true;
+    categoryNecessary.forEach((categoryID) => {
+      let found = false;
+      array.forEach((item) => {
+        if (item.category.id === categoryID) {
+          found = true;
+        }
+      });
+      if (!found) {
+        thisOk = false;
+      }
+    });
+    return thisOk;
+  };
+  private sortItems = async (): Promise<sorteds> => {
     // eslint-disable-next-line prefer-const
     let sorted = {
       Periféricos: null,
@@ -48,6 +68,7 @@ export class MainGameService {
     }
     return sorted;
   };
+
   async create(createMainGameDto: CreateMainGameDto): Promise<serverResponse> {
     const isValid = await GameValidationCreate.safeParseAsync(
       createMainGameDto,
@@ -222,10 +243,86 @@ export class MainGameService {
     const myPlayeds = await Play.findAll({
       where: {
         userID: ME.id,
-        include: [{ attributes: ['game'], model: Game }],
       },
     });
     return myPlayeds;
   }
-  async enterOnGame() {}
+  async enterOnGame(body: EnterPlay, req: Request) {
+    // Zod validation
+    const isValid = await PlayValidationCreate.safeParseAsync(body);
+    if (isValid.success === false) {
+      throw new NotAcceptableException('Opa!', isValid.error.errors[0].message);
+    }
+
+    // Collect a token
+    const ME: decodedToken = jwtDecode(req.headers['authorization']);
+    // Verify if is played, case played, not ok
+    const iPlayed = await Play.findOne({
+      where: {
+        userID: ME.id,
+        gameID: body.gameID,
+      },
+    });
+    if (iPlayed) {
+      throw new ConflictException('Ops.', 'Você já jogou!');
+    }
+
+    // GameID Exist
+    const game = await Game.findOne({ where: { id: body.gameID } });
+    if (!game) {
+      throw new NotFoundException('Ops.', 'Jogo inexistente.');
+    }
+
+    // Validate any items received
+    const originalItems = await Piece.findAll();
+    const itemsFromPlayer: ItemCheck[] = [];
+    body['items'].forEach((item) => {
+      const findItem = originalItems.findIndex(
+        (beforeItem) => beforeItem['id'] === item.id,
+      );
+      if (findItem < 0) {
+        throw new NotFoundException('Ops.', `Peça #${item.id} não encontrada.`);
+      }
+      if (item.categoryID !== originalItems[findItem]['category']['id']) {
+        throw new BadRequestException(
+          'Ops.',
+          `A categoria da peça #${item.id} não corresponde.`,
+        );
+      }
+      itemsFromPlayer.push({
+        itemID: item.id,
+        category: {
+          id: item.categoryID,
+        },
+      });
+    });
+
+    // Check if the array contains all categories
+    const finalCheck = this.checkArrayWithPiecesChoiced(itemsFromPlayer);
+    if (!finalCheck) {
+      throw new BadRequestException(
+        'Hum...',
+        'Nem todas as categorias estão na lista.',
+      );
+    }
+
+    // Collect this date
+    const data = new Date().toISOString();
+
+    return await Play.create({
+      choiceds: itemsFromPlayer,
+      userID: ME.id,
+      gameID: body.gameID,
+      date: data,
+    })
+      .then(() => {
+        return true;
+      })
+      .catch((err) => {
+        throw new InternalServerErrorException(
+          'Ops.',
+          'Houve um erro interno, tente novamente mais tarde.',
+        );
+      });
+  }
 }

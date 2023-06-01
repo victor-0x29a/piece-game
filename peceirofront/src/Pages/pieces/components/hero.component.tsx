@@ -4,7 +4,7 @@ import Box from '@mui/material/Box'
 import { pieceHeroProps } from '../types/props.pieces'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
-const PiecesHeroComponent = ({ played }: pieceHeroProps) => {
+const PiecesHeroComponent = () => {
     const mobile = useMediaQuery("(max-width: 600px)")
 
     return <Box component="div" style={{
@@ -20,7 +20,7 @@ const PiecesHeroComponent = ({ played }: pieceHeroProps) => {
             fontSize: !mobile ? "2rem" : "1.4rem",
             fontWeight: "600",
             fontFamily: "arial"
-        }}> {played ? "Aguarde o próximo jogo!" : "Aposte os componentes"}</h2>
+        }}>Escolha e aposte!</h2>
     </Box>
 }
 

@@ -8,10 +8,10 @@
     "\\src\\main-game\\dto",
     "\\src\\main-game\\entities",
     "\\src\\pieces",
+    "\\src\\pieces\\dto",
     "\\src\\pieces\\entities",
-    "\\src\\user",
-    "\\src\\user\\entities"
+    "\\src\\user"
   ],
-  "SelectedNode": "\\src\\pieces\\entities\\piece.entity.ts",
+  "SelectedNode": "\\src\\main-game\\main-game.service.ts",
   "PreviewInSolutionExplorer": false
 }
