@@ -25,7 +25,7 @@ export class Play extends Model {
   @Column({ allowNull: true, type: DataType.BOOLEAN, defaultValue: false })
   winned: boolean;
 
-    @Column( { allowNull: true, type: DataType.BOOLEAN, defaultValue: false })
+  @Column({ allowNull: true, type: DataType.BOOLEAN, defaultValue: false })
   received: boolean;
 
   @ForeignKey(() => Game)
