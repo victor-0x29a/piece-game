@@ -1,4 +1,3 @@
-
 <h1 align="center">
   <br>
   <img src="https://media4.giphy.com/media/l2Je6sbvJEn1W9OWQ/giphy.gif" alt="Piece game's" width="200">
@@ -7,43 +6,43 @@
   <br>
 </h1>
 
-<h4 align="center">Jogo de aposta, baseada em peças (componentes) de computadores.</h4>
+<h4 align="center">A gambling game based on computer components (pieces).</h4>
 
 
-## Propósito
+## Purpose
 
-Criar um back-end onde tenha um CRUD de usuários e componentes de computadores (conhecidos), após isso fazer com que os usuários consigam apostar em qual componente será sorteado, assim, todas as peças (componentes) que o usuário escolheu e bateu com o que o servidor sorteou, teoricamente ele "levaria" para a casa.
-* Vale lembrar que antes disso, haveria um sistema de créditos para conseguir apostar!
+Create a back-end with CRUD operations for users and known computer components. After that, allow users to place bets on which component will be drawn. If the user's chosen components match the ones drawn by the server, they would theoretically "win" those components.
+* It's worth mentioning that before that, there would be a credit system in place to enable placing bets!
 
-## Implementações
+## Implementations
 
-* No sistema de crédito, vou colocar a API sandbox do PagBank para gerar qr-codes PIX e simular o pagamento.
+* For the credit system, I will integrate the PagBank sandbox API to generate PIX QR codes and simulate payments.
 
-## Tecnologias utilizadas
+## Technologies Used
 
  - NestJS
  - ReactJS
  - Docker
 
-## Módulos utilizados
+## Used Modules
 
 Backend:
 
-- Validação de dados: ZOD;
-- Autenticação: JWT;
-- SGDB: MySQL;
+- Data validation: ZOD;
+- Authentication: JWT;
+- DBMS: MySQL;
 - ORM: Sequelize;
 
 Frontend:
 
-- Validação de dados: YUP + Formik;
+- Data validation: YUP + Formik;
 - Store: Redux;
 - Framework: MUI;
-- Style: Styled-components;
-- Requisições: Axios;
+- Styling: Styled-components;
+- HTTP Requests: Axios;
 - Alerts: React-toastify;
 
-## Créditos - tools and frameworks
+## Credits - tools and frameworks
 
 - [Docker](https://www.docker.com/)
 - [React.js](https://react.dev/)
@@ -59,4 +58,3 @@ MIT
 
 > GitHub [@victor-0x29a](https://github.com/victor-0x29a) &nbsp;&middot;&nbsp;
 > Linkedin [@viictor](https://www.linkedin.com/in/viictor/)
-
