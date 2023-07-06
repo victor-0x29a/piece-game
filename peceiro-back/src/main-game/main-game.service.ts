@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   ConflictException,
+  ForbiddenException,
   Injectable,
   InternalServerErrorException,
   NotAcceptableException,
@@ -24,6 +25,7 @@ import { decodedToken } from '../autenticacao/types/auth.type';
 import { Play } from '../database/entities/play.entity';
 import { EnterPlay, ItemCheck } from './entities/play.entity';
 import { PlayValidationCreate } from './dto/create-play.dto';
+import { User } from '../database/entities/user.entity';
 
 @Injectable()
 export class MainGameService {
@@ -43,6 +45,7 @@ export class MainGameService {
     });
     return thisOk;
   };
+
   private sortItems = async (): Promise<sorteds> => {
     // eslint-disable-next-line prefer-const
     let sorted = {
@@ -76,6 +79,16 @@ export class MainGameService {
     if (isValid.success === false) {
       throw new NotAcceptableException('Opa!', isValid.error.errors[0].message);
     }
+
+    // check iso date
+    const dateNow: string = new Date().toISOString();
+    if (
+      Number(createMainGameDto.day.toString().slice(0, 4)) <
+      Number(dateNow.slice(0, 4))
+    ) {
+      throw new NotAcceptableException('Opa!', 'Confira sua data!');
+    }
+
     const sorteados = await this.sortItems();
 
     return await Game.create({
@@ -145,6 +158,15 @@ export class MainGameService {
     if (isValid.success === false) {
       throw new NotAcceptableException('Opa!', isValid.error.errors[0].message);
     }
+
+    const dateNow: string = new Date().toISOString();
+    if (
+      Number(updateMainGameDto.day.toString().slice(0, 4)) <
+      Number(dateNow.slice(0, 4))
+    ) {
+      throw new NotAcceptableException('Opa!', 'Confira sua data!');
+    }
+
     const game = await Game.findOne({ where: { id: id } });
     if (!game) {
       throw new NotFoundException('Hum!', 'Sorteio não encontrado.');
@@ -238,6 +260,7 @@ export class MainGameService {
       data: PerProfile,
     };
   }
+
   async getMyStats(req: Request) {
     const ME: decodedToken = jwtDecode(req.headers['authorization']);
     const myPlayeds = await Play.findAll({
@@ -247,6 +270,7 @@ export class MainGameService {
     });
     return myPlayeds;
   }
+
   async enterOnGame(body: EnterPlay, req: Request) {
     // Zod validation
     const isValid = await PlayValidationCreate.safeParseAsync(body);
@@ -254,12 +278,18 @@ export class MainGameService {
       throw new NotAcceptableException('Opa!', isValid.error.errors[0].message);
     }
 
-    // Collect a token
-    const ME: decodedToken = jwtDecode(req.headers['authorization']);
+    const FindByMail = await User.findOne({
+      where: {
+        email: body.email,
+      },
+    });
+    if (!FindByMail) {
+      throw new ForbiddenException();
+    }
     // Verify if is played, case played, not ok
     const iPlayed = await Play.findOne({
       where: {
-        userID: ME.id,
+        userID: body.email,
         gameID: body.gameID,
       },
     });
@@ -311,7 +341,7 @@ export class MainGameService {
 
     return await Play.create({
       choiceds: itemsFromPlayer,
-      userID: ME.id,
+      userID: body.email,
       gameID: body.gameID,
       date: data,
     })
@@ -319,6 +349,7 @@ export class MainGameService {
         return true;
       })
       .catch((err) => {
+        console.log(err);
         throw new InternalServerErrorException(
           'Ops.',
           'Houve um erro interno, tente novamente mais tarde.',

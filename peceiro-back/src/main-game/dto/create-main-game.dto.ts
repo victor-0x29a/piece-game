@@ -16,7 +16,7 @@ export const GameValidationCreate = z.object({
     .min(12, 'A descrição deve ter no mínimo 12 caracteres.')
     .max(1200, 'A descrição deve ter no máximo 1200 caracteres.'),
   day: z
-    .string()
+    .string({ required_error: 'Confira a data em modelo ISO!' })
     .regex(
       /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)/,
       'Data modelo ISO inválida.',

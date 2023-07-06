@@ -19,6 +19,12 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import vUseDate from '../../../customHooks/vUseDate';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import { key } from '../../piece/types/props.game';
+import Typography from '@mui/material/Typography'
+
 
 const GameDialogComponent = ({ Open, setOpen, Account, setLoading, Atualization, Game }: gameDialogPropsComponent) => {
     const [title, setTitle] = React.useState("")
@@ -128,6 +134,16 @@ const GameDialogComponent = ({ Open, setOpen, Account, setLoading, Atualization,
         })
     }
 
+    const getKey = (key: string): key => {
+        if(key === "Ambiente") return "Ambiente"
+        if (key === "Acessórios") return "Acessórios"
+        if (key === "Periféricos") return "Periféricos"
+        if (key === "Placa de vídeo") return "Placa de vídeo"
+        if (key === "Processadores") return "Processadores"
+        if (key === "Refrigeração") return "Refrigeração"
+        if (key === "Tela") return "Tela"
+        return "Tela";
+    }
     return <Dialog open={Open} sx={{
         zIndex: 900
     }} >
@@ -138,7 +154,7 @@ const GameDialogComponent = ({ Open, setOpen, Account, setLoading, Atualization,
             flexDirection: "column",
             alignItems: "center"
         }}>
-            <DialogTitle>{title}</DialogTitle>
+            <DialogTitle sx={{width: "80%"}}>{title}</DialogTitle>
             <TextField
                 sx={{
                     marginTop: "1rem",
@@ -177,13 +193,39 @@ const GameDialogComponent = ({ Open, setOpen, Account, setLoading, Atualization,
                     label="Data do jogo" value={day} />
             </LocalizationProvider>
 
+            <Typography variant={"h6"} sx={{
+                   marginTop: "1rem",
+                   width: "80%",
+            }}>    
+                Peças sorteadas
+            </Typography>
+            <List dense={true} sx={{
+                  margin: "0",
+                  width: "70%",
+                  padding: "22px",
+            }}>
+                {Object.keys(Game.sorted).map((key: string, index: number) => 
+                    (
+                        <ListItem key={Number(index)} sx={{
+                            padding: "0"
+                        }}>
+                            <ListItemText
+                                primary={`${key}: ${Game.sorted[getKey(key)].product}`}
+                            />
+                        </ListItem>
+                    )
+                )}
+            </List>
+            
+
             <Box component={"section"} sx={{
                 width: "100%",
                 display: "flex",
                 justifyContent: "space-evenly",
                 flexDirection: "row",
                 marginTop: "1rem",
-                paddingBottom: "1rem"
+                paddingBottom: "1rem",
+                overflow: "hidden"
             }}>
                 <Button variant="contained" color="primary" type="submit" sx={{
                     color: "white",

@@ -8,6 +8,7 @@ export interface PiecePlay {
 export interface EnterPlay {
   items: PiecePlay[];
   gameID: number;
+  email: string;
 }
 
 export type CategoryPlayDTO = Partial<CategoryDto>;

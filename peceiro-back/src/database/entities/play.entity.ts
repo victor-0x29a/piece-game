@@ -19,8 +19,8 @@ export class Play extends Model {
   @Column({ allowNull: false, type: DataType.STRING })
   date: string;
 
-  @Column({ allowNull: false, type: DataType.INTEGER })
-  userID: number;
+  @Column({ allowNull: false, type: DataType.STRING })
+  userID: string;
 
   @Column({ allowNull: true, type: DataType.BOOLEAN, defaultValue: false })
   winned: boolean;

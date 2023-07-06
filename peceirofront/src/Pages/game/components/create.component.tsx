@@ -21,8 +21,8 @@ import TextareaAutosize from '@mui/base/TextareaAutosize';
 
 
 const GameCreateComponent = ({ Open, setOpen, Account, setLoading, Atualization }: gameCreatePropsComponent) => {
-    const [title, setTitle] = React.useState<string>("")
-    const [description, setDescription] = React.useState<string>('')
+    const [title, setTitle] = React.useState<string>("Coloque um título")
+    const [description, setDescription] = React.useState<string>('Coloque uma descrição.')
     const [day, setDay] = React.useState<Dayjs | null>(dayjs('2023-04-17'))
     const mobile = useMediaQuery("(max-width: 612px)")
 
@@ -39,7 +39,7 @@ const GameCreateComponent = ({ Open, setOpen, Account, setLoading, Atualization 
         }),
         onSubmit: async (values, Formulario) => {
             setLoading(true)
-            let data = dayjs(values.day).toISOString()
+            const data = dayjs(values.day).toISOString()
             await vUseFetch({
                 endpoint: `/main-game`,
                 method: "POST",
@@ -58,6 +58,8 @@ const GameCreateComponent = ({ Open, setOpen, Account, setLoading, Atualization 
                 Formulario.setTouched({ title: false, description: false })
                 setOpen(false)
                 setLoading(false)
+                setTitle("")
+                setDescription("")
                 Atualization()
             }).catch(async (err) => {
                 if (err.data.error) {
@@ -78,7 +80,7 @@ const GameCreateComponent = ({ Open, setOpen, Account, setLoading, Atualization 
 
 
     const handleTitle = async (e: React.ChangeEvent<any>) => {
-        if (title.length >= 40) {
+        if (title.length >= 39) {
             setTitle(title)
             await vUseAlert('warning', 'Máximo de caracteres atingido.')
         }
@@ -87,7 +89,7 @@ const GameCreateComponent = ({ Open, setOpen, Account, setLoading, Atualization 
     }
 
     const handleDescription = async (e: React.ChangeEvent<any>) => {
-        if (description.length >= 1200) {
+        if (description.length >= 1999) {
             setDescription(description)
             await vUseAlert('warning', 'Máximo de caracteres atingido.')
         }
@@ -107,86 +109,114 @@ const GameCreateComponent = ({ Open, setOpen, Account, setLoading, Atualization 
         setLoading(false)
     }
 
-    return <Dialog open={Open} sx={{
-        zIndex: 900
-    }} >
-        <Box component={"form"} onSubmit={Formik.handleSubmit} sx={{
-            width: "500px",
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-            alignItems: "center"
-        }}>
+    return (
+        <Dialog open={Open} sx={{ zIndex: 900 }}>
+          <Box
+            component="form"
+            onSubmit={Formik.handleSubmit}
+            sx={{
+              width: "500px",
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
             <DialogTitle>{title}</DialogTitle>
             <TextField
-                sx={{
-                    marginTop: "1rem",
-                    width: "80%"
-                }}
-                label="Título do sorteio"
-                type='text'
-                color="primary"
-                name="product"
-                value={title}
-                onBlur={Formik.handleBlur}
-                onChange={handleTitle}
-                error={Formik.touched.title && Formik.errors.title ? true : false}
-                helperText={Formik.touched.title && Formik.errors.title ? Formik.errors.title.toString() : ""}
+              sx={{
+                marginTop: "1rem",
+                width: "80%",
+              }}
+              label="Título do sorteio"
+              type="text"
+              color="primary"
+              name="title"
+              value={title}
+              onBlur={Formik.handleBlur}
+              onChange={handleTitle}
+              error={Formik.touched.title && Formik.errors.title ? true : false}
+              helperText={
+                Formik.touched.title && Formik.errors.title
+                  ? Formik.errors.title.toString()
+                  : ""
+              }
             />
-
+      
             <TextareaAutosize
-                minRows={3}
-                value={description}
-                onBlur={Formik.handleBlur}
-                onChange={handleDescription}
-                name="description"
-                placeholder='Descrição do jogo'
-                style={{
-                    marginTop: "1rem",
-                    width: "70%",
-                    padding: "22px"
-                }}
+              minRows={3}
+              value={description}
+              onBlur={Formik.handleBlur}
+              onChange={handleDescription}
+              name="description"
+              placeholder="Descrição do jogo"
+              style={{
+                marginTop: "1rem",
+                width: "70%",
+                padding: "22px",
+                border: Formik.touched.description && Formik.errors.description ? "1.2px solid red" : "1.2px solid black"
+              }}
             />
-
+      
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker sx={{
-                    marginTop: "1rem",
-                    width: "80%"
-                }} onChange={(e: any) => handleDay(e)}
-                    label="Data do jogo" value={day} />
+              <DatePicker
+                sx={{
+                  marginTop: "1rem",
+                  width: "80%",
+                }}
+                onChange={(e: any) => handleDay(e)}
+                label="Data do jogo"
+                value={day}
+              />
             </LocalizationProvider>
-
-            <Box component={"section"} sx={{
+      
+            <Box
+              component="section"
+              sx={{
                 width: "100%",
                 display: "flex",
                 justifyContent: "space-evenly",
                 flexDirection: "row",
                 paddingBottom: "1rem",
                 marginTop: "1rem",
-            }}>
-                <Button variant="contained" color="primary" type="submit" sx={{
-                    color: "white",
-                    backgroundColor: "#6cbdb5",
-                    '&:hover': {
-                        backgroundColor: "#00b5b9",
-                    },
-                    fontSize: !mobile ? "1rem" : "1.15rem"
-                }}>
-                    Criar
-                </Button>
-                <Button variant="contained" color="primary" type="reset" onClick={() => handleClose()} sx={{
-                    color: "white",
-                    backgroundColor: "#bd6c6c",
-                    '&:hover': {
-                        backgroundColor: "#b90000",
-                    },
-                    fontSize: !mobile ? "1rem" : "1.15rem"
-                }}>
-                    Voltar
-                </Button>
+              }}
+            >
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                sx={{
+                  color: "white",
+                  backgroundColor: "#6cbdb5",
+                  "&:hover": {
+                    backgroundColor: "#00b5b9",
+                  },
+                  fontSize: !mobile ? "1rem" : "1.15rem",
+                }}
+              >
+                Criar
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                type="reset"
+                onClick={() => handleClose()}
+                sx={{
+                  color: "white",
+                  backgroundColor: "#bd6c6c",
+                  "&:hover": {
+                    backgroundColor: "#b90000",
+                  },
+                  fontSize: !mobile ? "1rem" : "1.15rem",
+                }}
+              >
+                Voltar
+              </Button>
             </Box>
-        </Box>
-    </Dialog>
+          </Box>
+        </Dialog>
+      );
+      
 }
 
 const MapStateToProps = (state: stateType) => ({

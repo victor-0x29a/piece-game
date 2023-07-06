@@ -19,4 +19,7 @@ export const PlayValidationCreate = z.object({
     .array()
     .min(7, { message: 'Mínimo e máximo de 7 items.' })
     .max(7, { message: 'Mínimo e máximo de 7 items.' }),
+  email: z
+    .string({ required_error: 'O email é necessário.' })
+    .email({ message: 'Confira o email.' }),
 });
